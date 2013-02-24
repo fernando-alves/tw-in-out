@@ -1,0 +1,7 @@
+  $ bundle
+
+== Testing
+  $ guard
+
+== Runnig
+  $ rails server
