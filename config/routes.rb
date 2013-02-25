@@ -1,6 +1,9 @@
 TwInOutWeb::Application.routes.draw do
+
   root :to => 'home#index'
   get "home/index"
+
+  resources :punches
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
