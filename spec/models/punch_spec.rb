@@ -14,4 +14,12 @@ describe Punch do
       Punch.build_with(user, params).should_not be_nil
     end
   end
+
+  describe "querying" do
+    it "should retrieve all punches by user" do
+      punch = create(:punch)
+      user = punch.user
+      Punch.where(user_id: user.id).should == [punch]
+    end
+  end
 end
