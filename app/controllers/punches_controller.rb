@@ -1,42 +1,26 @@
 class PunchesController < ApplicationController
+  before_filter :authenticate_user!
+  respond_to :html, :json
 
   def index
-    @punches = Punch.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @punches }
-    end
+    @punches = Punch.where(user_id: current_user.id)
+    respond_with @punches
   end
 
   def show
     @punch = Punch.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @punch }
-    end
   end
 
   def new
     @punch = Punch.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @punch }
-    end
   end
 
-  # GET /punches/1/edit
   def edit
     @punch = Punch.find(params[:id])
   end
 
-  # POST /punches
-  # POST /punches.json
   def create
-    @punch = Punch.new(params[:punch])
-
+    @punch = Punch.build_with(current_user, params[:punch])
     respond_to do |format|
       if @punch.save
         format.html { redirect_to @punch, notice: 'Punch was successfully created.' }
@@ -48,8 +32,6 @@ class PunchesController < ApplicationController
     end
   end
 
-  # PUT /punches/1
-  # PUT /punches/1.json
   def update
     @punch = Punch.find(params[:id])
 
@@ -64,12 +46,9 @@ class PunchesController < ApplicationController
     end
   end
 
-  # DELETE /punches/1
-  # DELETE /punches/1.json
   def destroy
     @punch = Punch.find(params[:id])
     @punch.destroy
-
     respond_to do |format|
       format.html { redirect_to punches_url }
       format.json { head :no_content }

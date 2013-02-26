@@ -36,10 +36,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.formatter = :documentation
+  #config.formatter = :documentation
+
+  config.include FactoryGirl::Syntax::Methods
 
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
-
-  config.include FactoryGirl::Syntax::Methods
 end

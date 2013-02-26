@@ -3,7 +3,7 @@ class CreatePunches < ActiveRecord::Migration
     create_table :punches do |t|
       t.timestamp :time
       t.references :user
-      t.string :type
+      t.string :kind
 
       t.timestamps
     end

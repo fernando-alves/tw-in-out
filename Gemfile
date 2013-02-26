@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
-gem 'devise'
+gem 'devise', '2.0.0'
 gem 'omniauth-google-oauth2'
 
 group :development, :test do
