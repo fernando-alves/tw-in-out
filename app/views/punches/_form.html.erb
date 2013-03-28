@@ -1,6 +1,6 @@
 <%= form_for(@punch) do |f| %>
   <% if @punch.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert">
       <h2><%= pluralize(@punch.errors.count, "error") %> prohibited this punch from being saved:</h2>
 
       <ul>
@@ -20,6 +20,6 @@
     <%= f.text_field :kind %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-large btn-block btn-primary" %>
   </div>
 <% end %>
