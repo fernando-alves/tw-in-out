@@ -1,6 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+ruby "2.0.0"
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'devise', '2.0.0'
 gem 'omniauth-google-oauth2'
 
