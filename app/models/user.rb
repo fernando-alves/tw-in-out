@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password
 
+  validates :email, format: { with: /@thoughtworks.com/ }
+
   def self.find_for_google_account(access_token, signed_in_resource=nil)
     data = access_token.info
     if user = User.where(:email => data["email"]).first
