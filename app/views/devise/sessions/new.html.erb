@@ -1,6 +1,9 @@
 <h1 class="demo-logo">
   <div class="logo"></div>
-  <b>Thought</b>Works In-Out!
-  <small>make your time easy!</small>
+  <div class"subtitle" style="float: right">
+    In-Out<small>make your time easy!</small>
+  </div>
 </h1>
-<%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+<div class="span3">
+<%= link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-large btn-block btn-primary" %>
+</div>
