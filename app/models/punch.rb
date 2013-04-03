@@ -9,4 +9,12 @@ class Punch < ActiveRecord::Base
     self.new(options)
   end
 
+  def self.kinds
+    [IN, OUT]
+  end
+
+  private
+  IN = "IN"
+  OUT = "OUT"
+
 end
