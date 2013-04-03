@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div id="punch" class="field">
     <%= f.label :time %><br />
     <%= f.datetime_select :time %>
   </div>
   <div class="field">
     <%= f.label :kind %><br />
-    <%= f.text_field :kind %>
+    <%= f.select :kind, Punch.kinds %>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-large btn-block btn-primary" %>
