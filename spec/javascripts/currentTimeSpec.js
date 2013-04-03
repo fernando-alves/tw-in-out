@@ -2,7 +2,7 @@ describe("Current Time", function() {
   var currentTime;
   beforeEach(function() {
     loadFixtures("new_punch.html");
-    currentTime = new CurrentTime(new Date(2012, 1, 1, 9, 0));
+    currentTime = new CurrentTime(new Date(2012, 1, 1, 9, 30));
   });
   it("should load the template", function() {
     expect($('#punch')).toContain($("#punch_time_1i"));
@@ -29,6 +29,6 @@ describe("Current Time", function() {
   });
   it("should set the current minutes", function() {
     currentTime.setCurrentTime();
-    expect($("#punch_time_5i option[value=00]")).toBeSelected();
+    expect($("#punch_time_5i option[value=30]")).toBeSelected();
   });
 });
