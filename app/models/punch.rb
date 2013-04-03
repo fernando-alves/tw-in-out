@@ -9,6 +9,10 @@ class Punch < ActiveRecord::Base
     self.new(options)
   end
 
+  def self.all_by(user)
+    where(user_id: user.id).order(:time)
+  end
+
   def self.kinds
     [IN, OUT]
   end

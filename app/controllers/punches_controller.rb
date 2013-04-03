@@ -3,7 +3,7 @@ class PunchesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @punches = Punch.where(user_id: current_user.id)
+    @punches = Punch.all_by(current_user)
     respond_with @punches
   end
 

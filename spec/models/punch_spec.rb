@@ -19,7 +19,7 @@ describe Punch do
     it "should retrieve all punches by user" do
       punch = create(:punch)
       user = punch.user
-      Punch.where(user_id: user.id).should == [punch]
+      Punch.all_by(user).should == [punch]
     end
   end
 end

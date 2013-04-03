@@ -10,7 +10,7 @@ describe PunchesController do
 
   describe "GET index" do
     it "assigns all current users punches as @punches" do
-      Punch.stub(:where).with(user_id: @current_user.id) { [punch] }
+      Punch.stub(:all_by).with(@current_user) { [punch] }
       get :index, {}
       assigns(:punches).should eq([punch])
     end
