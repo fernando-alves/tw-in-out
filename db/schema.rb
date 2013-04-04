@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225172506) do
+ActiveRecord::Schema.define(:version => 20130404132413) do
 
   create_table "punches", :force => true do |t|
     t.datetime "time"
@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(:version => 20130225172506) do
     t.string   "kind"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "workday_id"
   end
 
   add_index "punches", ["user_id"], :name => "index_punches_on_user_id"
+  add_index "punches", ["workday_id"], :name => "index_punches_on_workday_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",              :default => "", :null => false
@@ -31,5 +33,11 @@ ActiveRecord::Schema.define(:version => 20130225172506) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "workdays", :force => true do |t|
+    t.date     "day"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

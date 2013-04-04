@@ -6,5 +6,6 @@ FactoryGirl.define do
     time "2013-02-25 14:25:06"
     user
     kind "IN"
+    workday
   end
 end

@@ -3,9 +3,10 @@ require 'spec_helper'
 describe PunchesController do
   login
   let(:punch) { mock_model(Punch, id: 1) }
+  let(:workday) { create(:workday) }
 
   def valid_attributes
-    { "time"=> "2013-01-01 09:00:00", "kind"=> "IN" }
+    { "time"=> "2013-01-01 09:00:00", "kind"=> "IN", "workday_id" => "#{workday.id}" }
   end
 
   describe "GET index" do
