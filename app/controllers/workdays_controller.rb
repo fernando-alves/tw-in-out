@@ -1,8 +1,8 @@
 class WorkdaysController < ApplicationController
-  # GET /workdays
-  # GET /workdays.json
+  before_filter :authenticate_user!
+
   def index
-    @workdays = Workday.all
+    @workdays = Workday.order(:day).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +10,6 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  # GET /workdays/1
-  # GET /workdays/1.json
   def show
     @workday = Workday.find(params[:id])
 
@@ -21,8 +19,6 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  # GET /workdays/new
-  # GET /workdays/new.json
   def new
     @workday = Workday.new
 
@@ -32,18 +28,15 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  # GET /workdays/1/edit
   def edit
     @workday = Workday.find(params[:id])
   end
 
-  # POST /workdays
-  # POST /workdays.json
   def create
-    @workday = Workday.new(params[:workday])
+    @workday = Workday.find_or_create_by_day(params[:workday][:day])
 
     respond_to do |format|
-      if @workday.save
+      if @workday.valid?
         format.html { redirect_to @workday, notice: 'Workday was successfully created.' }
         format.json { render json: @workday, status: :created, location: @workday }
       else
@@ -53,8 +46,6 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  # PUT /workdays/1
-  # PUT /workdays/1.json
   def update
     @workday = Workday.find(params[:id])
 
@@ -69,8 +60,6 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  # DELETE /workdays/1
-  # DELETE /workdays/1.json
   def destroy
     @workday = Workday.find(params[:id])
     @workday.destroy
