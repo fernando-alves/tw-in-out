@@ -1,19 +1,17 @@
 <h1>Listing punches</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Time</th>
     <th>Kind</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
-<% @punches.each do |punch| %>
+<% punches.each do |punch| %>
   <tr>
-    <td><%= punch.time %></td>
+    <td><%= punch.time.to_s(:time) %></td>
     <td><%= punch.kind %></td>
-    <td><%= link_to 'Show', punch %></td>
     <td><%= link_to 'Edit', edit_punch_path(punch) %></td>
     <td><%= link_to 'Destroy', punch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

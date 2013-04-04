@@ -9,14 +9,6 @@ describe PunchesController do
     { "time"=> "2013-01-01 09:00:00", "kind"=> "IN", "workday_id" => "#{workday.id}" }
   end
 
-  describe "GET index" do
-    it "assigns all current users punches as @punches" do
-      Punch.stub(:all_by).with(@current_user) { [punch] }
-      get :index, {}
-      assigns(:punches).should eq([punch])
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested punch as @punch" do
       Punch.stub(:find).with("1") { punch }
@@ -43,9 +35,9 @@ describe PunchesController do
   describe "POST create" do
     describe "with valid params" do
       it "should built a new Punch with current user" do
-        Punch.stub(:build_with).with(anything) { punch }
+        Punch::Register.stub(:punch).with(anything) { punch }
         punch.stub(:save) { true }
-        Punch.should_receive(:build_with).with(@current_user, valid_attributes)
+        Punch::Register.should_receive(:punch).with(@current_user, valid_attributes)
         post :create, {:punch => valid_attributes}
       end
       it "creates a new Punch" do

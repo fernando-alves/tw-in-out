@@ -5,13 +5,8 @@ class Punch < ActiveRecord::Base
   belongs_to :workday
   validates :user, :time, :kind, :workday, :presence => true
 
-  def self.build_with(current_user, options)
-    options[:user_id] = current_user.id
-    self.new(options)
-  end
-
-  def self.all_by(user)
-    where(user_id: user.id).order(:time)
+  def self.all_by(params)
+    where(user_id: params[:user].id, workday_id: params[:workday].id).order(:time)
   end
 
   def self.kinds
