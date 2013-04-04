@@ -1,6 +1,6 @@
 <h1>Listing workdays</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Day</th>
     <th></th>
@@ -8,7 +8,7 @@
 
 <% @workdays.each do |workday| %>
   <tr>
-    <td><%= workday.day %></td>
+    <td><%= workday.day.to_s(:day) %></td>
     <td><%= link_to 'Show', workday %></td>
   </tr>
 <% end %>

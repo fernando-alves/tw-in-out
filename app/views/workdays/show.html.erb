@@ -2,7 +2,7 @@
 
 <p>
   <b>Day:</b>
-  <%= @workday.day %>
+  <%= @workday.day.to_s(:day) %>
 </p>
 <%= render :partial => "punches/list", :locals => { :punches => @workday.punches } %>
 
