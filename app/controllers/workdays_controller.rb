@@ -12,7 +12,7 @@ class WorkdaysController < ApplicationController
 
   def show
     @workday = Workday.find(params[:id])
-
+    @punches = Punch.all_by(user: current_user, workday: @workday)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @workday }

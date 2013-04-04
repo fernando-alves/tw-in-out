@@ -4,7 +4,7 @@
   <b>Day:</b>
   <%= @workday.day.to_s(:day) %>
 </p>
-<%= render :partial => "punches/list", :locals => { :punches => @workday.punches } %>
+<%= render :partial => "punches/list", :locals => { :punches => @punches } %>
 
 
 <%= link_to 'Back', workdays_path %>
