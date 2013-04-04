@@ -20,7 +20,7 @@ class PunchesController < ApplicationController
   end
 
   def create
-    @punch = Punch.build_with(current_user, params[:punch])
+    @punch = Punch::Register.punch(current_user, params[:punch])
     respond_to do |format|
       if @punch.save
         format.html { redirect_to @punch, notice: 'Punch was successfully created.' }
