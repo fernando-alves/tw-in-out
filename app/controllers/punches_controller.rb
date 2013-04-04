@@ -3,8 +3,7 @@ class PunchesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @punches = Punch.all_by(current_user)
-    respond_with @punches
+    redirect_to controller: "workdays", action: "index"
   end
 
   def show

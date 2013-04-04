@@ -25,6 +25,7 @@ describe Punch::Register do
     end
 
     context "when workday already exist" do
+      before {Workday.create(day: "2013-04-04") }
       it "should use current workday" do
         punch = Punch::Register.punch(user, params)
         Workday.count.should be(1)

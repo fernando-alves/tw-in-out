@@ -4,6 +4,7 @@
   <b>Day:</b>
   <%= @workday.day %>
 </p>
+<%= render :partial => "punches/list", :locals => { :punches => @workday.punches } %>
 
 
 <%= link_to 'Back', workdays_path %>

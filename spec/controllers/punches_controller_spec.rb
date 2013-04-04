@@ -9,14 +9,6 @@ describe PunchesController do
     { "time"=> "2013-01-01 09:00:00", "kind"=> "IN", "workday_id" => "#{workday.id}" }
   end
 
-  describe "GET index" do
-    it "assigns all current users punches as @punches" do
-      Punch.stub(:all_by).with(@current_user) { [punch] }
-      get :index, {}
-      assigns(:punches).should eq([punch])
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested punch as @punch" do
       Punch.stub(:find).with("1") { punch }

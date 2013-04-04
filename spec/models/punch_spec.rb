@@ -9,10 +9,11 @@ describe Punch do
   end
 
   describe "querying" do
-    it "should retrieve all punches by user" do
+    it "should retrieve all punches by user and workday" do
       punch = create(:punch)
+      workday = punch.workday
       user = punch.user
-      Punch.all_by(user).should == [punch]
+      Punch.all_by(user: user, workday: workday).should == [punch]
     end
   end
 end
