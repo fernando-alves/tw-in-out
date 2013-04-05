@@ -35,3 +35,8 @@ TwInOutWeb::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+if Rails.env.development?
+  ENV["CLIENT_ID"] = "928699409569-jkotgu87rq2ue424mg437rbdgj9glopp.apps.googleusercontent.com"
+  ENV["CLIENT_SECRET"] = "-DyKcmFAZMKbhZz8KKpxFhMt"
+end
