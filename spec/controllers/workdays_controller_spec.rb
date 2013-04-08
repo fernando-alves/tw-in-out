@@ -12,14 +12,15 @@ describe WorkdaysController do
     context "when the current user has a punch" do
       let(:a_punch) { create(:punch) }
       let(:another_punch) { create(:other_punch) }
-      let(:punch) { a_punch.clone }
+      let(:workday) { a_punch.workday }
       before do
-        punch.user = @current_user
-        punch.save
+        2.times do
+          Punch.create(time: Time.now, kind: "IN", user_id: @current_user.id, workday_id: workday.id)
+        end
       end
       it "assigns all workdays of the current user as @workdays" do
         get :index
-        assigns(:workdays).should eq([punch.workday])
+        assigns(:workdays).should eq([workday])
       end
     end
   end

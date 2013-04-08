@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password
   has_many :punches
-  has_many :workdays, through: :punches
+  has_many :workdays, through: :punches, uniq: true
   validates :email, format: { with: /@thoughtworks.com/ }
 
   def self.find_for_google_account(access_token, signed_in_resource=nil)
