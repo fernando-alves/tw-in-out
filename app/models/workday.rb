@@ -3,4 +3,6 @@ class Workday < ActiveRecord::Base
 
   has_many :punches
   validates :day, :presence => true
+
+  default_scope order(:day)
 end

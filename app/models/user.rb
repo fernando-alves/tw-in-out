@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:google_oauth2]
 
   attr_accessible :email, :password
-
+  has_many :punches
+  has_many :workdays, through: :punches
   validates :email, format: { with: /@thoughtworks.com/ }
 
   def self.find_for_google_account(access_token, signed_in_resource=nil)

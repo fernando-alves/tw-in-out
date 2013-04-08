@@ -1,31 +1,19 @@
 class WorkdaysController < ApplicationController
   before_filter :authenticate_user!
+  respond_to :html, :json
 
   def index
-    @workdays = Workday.order(:day).all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @workdays }
-    end
+    @workdays = current_user.workdays
   end
 
   def show
     @workday = Workday.find(params[:id])
     @punches = Punch.all_by(user: current_user, workday: @workday)
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @workday }
-    end
+    respond_with @workdays
   end
 
   def new
     @workday = Workday.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @workday }
-    end
   end
 
   def edit
