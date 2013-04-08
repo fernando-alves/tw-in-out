@@ -9,10 +9,18 @@ describe WorkdaysController do
   end
 
   describe "GET index" do
-    it "assigns all workdays as @workdays" do
-      workday = Workday.create! valid_attributes
-      get :index, {}
-      assigns(:workdays).should eq([workday])
+    context "when the current user has a punch" do
+      let(:a_punch) { create(:punch) }
+      let(:another_punch) { create(:other_punch) }
+      let(:punch) { a_punch.clone }
+      before do
+        punch.user = @current_user
+        punch.save
+      end
+      it "assigns all workdays of the current user as @workdays" do
+        get :index
+        assigns(:workdays).should eq([punch.workday])
+      end
     end
   end
 
