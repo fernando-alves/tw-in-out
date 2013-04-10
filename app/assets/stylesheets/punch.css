@@ -1,3 +1,14 @@
 #punch select {
   width: 115px;
 }
+
+#in-out.subtitle {
+  /*float: right;*/
+  margin: 0 auto;
+  width: 270px;
+  margin-bottom: 30px;
+}
+
+#description blockquote {
+  margin-bottom: 30px;
+}
