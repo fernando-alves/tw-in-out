@@ -4,8 +4,7 @@ class Punch::Register
     options[:user_id] = user.id
     punch = Punch.new(options)
     if punch.time
-      workday = Workday.find_or_create_by_day(punch.time.to_date)
-      punch.workday = workday
+      punch.workday = Workday.find_or_create_by_day(punch.time.to_date)
     end
     punch
   end

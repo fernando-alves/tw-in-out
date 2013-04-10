@@ -11,7 +11,7 @@ class PunchesController < ApplicationController
   end
 
   def new
-    @punch = Punch.new
+    @punch = Punch.next_by current_user
   end
 
   def edit
