@@ -3,7 +3,7 @@ class WorkdaysController < ApplicationController
   respond_to :html, :json
 
   def index
-    @workdays = current_user.workdays
+    @workdays = current_user.workdays.uniq
   end
 
   def show
