@@ -47,9 +47,10 @@ class PunchesController < ApplicationController
 
   def destroy
     @punch = Punch.find(params[:id])
+    workday = @punch.workday
     @punch.destroy
     respond_to do |format|
-      format.html { redirect_to punches_url }
+      format.html { redirect_to workday }
       format.json { head :no_content }
     end
   end
