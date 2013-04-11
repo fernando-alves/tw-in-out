@@ -12,7 +12,7 @@ class Punch::LunchTime
   private
   def create_lunch(params)
     date = @workday.day
-    time = Time.new(date.year, date.month, date.day, params[:hour], 0)
+    time = Time.zone.parse("#{date.year}-#{date.month}-#{date.day} #{params[:hour]}: 00")
     options = { kind: params[:kind], time: time }
     punch = Punch::Register.punch(@user, options)
     punch
