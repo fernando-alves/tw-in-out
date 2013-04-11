@@ -5,8 +5,8 @@ class Punch::LunchTime
   end
 
   def save
-    create_lunch(kind: Punch::IN, hour: 12).save
-    create_lunch(kind: Punch::OUT, hour: 13).save
+    create_lunch(kind: Punch::OUT, hour: 12).save
+    create_lunch(kind: Punch::IN, hour: 13).save
   end
 
   private
