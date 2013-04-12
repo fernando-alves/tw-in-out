@@ -1,10 +1,17 @@
 class Given
-  def self.a_punch_counter(*punches)
-    Punch::Counter.new punches
+
+  def self.a_in_out(options)
+    at_day = options[:at_day] || 1
+    punch_in, punch_out = options[:punch_in], options[:punch_out]
+    Punch::InOut.new(punch_in: Given.a_punch(on: at_day, at: punch_in),
+                     punch_out: Given.a_punch(on: at_day, at: punch_out))
+  end
+
+  def self.a_workday_counter(*in_outs)
+    Workday::Counter.new in_outs: in_outs
   end
 
   def self.a_punch(options)
-    options[:on] ||= 1
     Punch.new time: Time.zone.parse("2013-1-#{options[:on]} #{options[:at]}")
   end
 end
