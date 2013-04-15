@@ -2,7 +2,7 @@ require 'spec_helper'
 describe Workday::Counter do
 
   def t(hours)
-    Time.at(hours).utc.strftime("%H:%M")
+    TimeFormatter.format hours
   end
 
   describe "when punches are valids" do

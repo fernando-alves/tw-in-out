@@ -16,4 +16,8 @@ class Given
       Punch.new time: Time.zone.parse("2013-1-#{options[:on]} #{options[:at]}")
     end
   end
+
+  def self.a_in_out_presenter_with(options)
+    InOutPresenter.new Given.a_in_out(options)
+  end
 end
