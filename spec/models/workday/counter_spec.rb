@@ -37,24 +37,15 @@ describe Workday::Counter do
   end
 
   describe "when punches aren't valids" do
-    context "validations" do
-      it { should validate_presence_of :in_outs }
-      it { should_not allow_value(nil).for(:in_outs) }
-      it { should_not allow_value([]).for(:in_outs) }
-    end
-
     context "when only has one punch" do
-      subject { Given.a_workday_counter Given.a_in_out(punch_in: "09:00") }
-      xit "should throw InOut exception" do
-        expect { subject.hours }.to raise_error Exception
-      end
+      workday_counter = Given.a_workday_counter Given.a_in_out(punch_in: "09:00")
+      it { t(workday_counter.hours).should == "00:00" }
     end
     context "when has odd punches" do
-      let(:morning_in) { Punch.new time: Time.zone.parse("2013-1-1 09:00") }
-      let(:morning_out) { Punch.new time: Time.zone.parse("2013-1-1 12:00") }
-      let(:afternoon_in) { Punch.new time: Time.zone.parse("2013-1-1 13:00") }
-      subject { Workday::Counter.new [morning_in, morning_out, afternoon_in] }
-      xit { subject.hours.should == "00:00" }
+      workday_counter = Given.a_workday_counter(
+                            Given.a_in_out(punch_in: "09:00", punch_out: "12:00"),
+                            Given.a_in_out(punch_in: "13:00"))
+      it { t(workday_counter.hours).should == "03:00" }
     end
   end
 

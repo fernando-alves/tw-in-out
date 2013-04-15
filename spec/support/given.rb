@@ -12,6 +12,8 @@ class Given
   end
 
   def self.a_punch(options)
-    Punch.new time: Time.zone.parse("2013-1-#{options[:on]} #{options[:at]}")
+    if options[:at]
+      Punch.new time: Time.zone.parse("2013-1-#{options[:on]} #{options[:at]}")
+    end
   end
 end

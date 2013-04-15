@@ -1,19 +1,15 @@
 class Punch::InOut
-  include ActiveModel::Validations
 
-  validates :punch_in, :punch_out, :presence => true
-
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
+  def initialize(params)
+    @punch_in, @punch_out = params[:punch_in], params[:punch_out]
   end
 
   def hours
-    punch_out.time.to_i - punch_in.time.to_i
+    completed? ? (@punch_out.time.to_i - @punch_in.time.to_i) : nil
   end
 
-  private
-  attr_accessor :punch_in, :punch_out
+  def completed?
+    @punch_in && @punch_out
+  end
 
 end
