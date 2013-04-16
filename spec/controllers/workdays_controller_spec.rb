@@ -21,7 +21,7 @@ describe WorkdaysController do
       end
       it "assigns all workdays of the current user as @workdays" do
         get :index
-        assigns(:workdays).should eq([workday])
+        assigns(:workdays).size.should == 1
       end
     end
   end
