@@ -1,19 +1,21 @@
 class InOutPresenter
+  include ActionView::Helpers::UrlHelper
+  delegate :punch_in, :punch_out, to: :"@in_out"
 
   def initialize(in_out)
     @in_out = in_out
   end
 
   def in
-    TimeFormatter.format @in_out.punch_in.time
+    @in_out.punch_in ? TimeFormatter.format(@in_out.punch_in.time) : ""
   end
 
   def out
-    TimeFormatter.format @in_out.punch_out.time
+    @in_out.punch_out ? TimeFormatter.format(@in_out.punch_out.time) : ""
   end
 
   def hours
-    TimeFormatter.format @in_out.hours
+    TimeFormatter.format(@in_out.hours || 0)
   end
 
 end

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe WorkdaysController do
   login
   let(:workday) { mock_model(Workday, id: 1) }
+  let(:punches) { [mock_model(Punch)] }
 
   def valid_attributes
     { day: Time.now.to_s }
@@ -28,8 +29,9 @@ describe WorkdaysController do
   describe "GET show" do
     it "assigns the requested workday as @workday" do
       Workday.stub(:find).with("1") { workday }
+      Punch.stub(:all_by).with(anything) { punches }
       get :show, {:id => workday.to_param}
-      assigns(:workday).should eq(workday)
+      assigns(:presenter).should be_a WorkdayPresenter
     end
   end
 

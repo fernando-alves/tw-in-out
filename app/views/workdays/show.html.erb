@@ -2,13 +2,13 @@
 
 <p>
   <b>Day:</b>
-  <%= @workday.day.to_s(:day) %>
+  <%= @presenter.workday.day.to_s(:day) %>
 </p>
-<%= render :partial => "punches/list", :locals => { :punches => @punches } %>
+<%= render :partial => "punches/list", :locals => { :in_outs => @presenter.in_outs } %>
 
-<%= form_for(@workday, url: lunch_times_path, method: :post) do |f| %>
+<%= form_for(@presenter.workday, url: lunch_times_path, method: :post) do |f| %>
   <%= f.hidden_field :id %>
-  <%= f.submit "Add automatic lunch time" %>
+  <%= f.submit "Add automatic lunch time", data: { confirm: 'Are you sure?' } %>
 <% end %>
 
 <%= link_to 'Back', workdays_path %>
