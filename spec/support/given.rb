@@ -17,6 +17,12 @@ class Given
     end
   end
 
+  def self.a_punches_at(*hours)
+    punches = []
+    hours.each { |h| punches << a_punch(on: 1, at: h)  }
+    punches
+  end
+
   def self.a_in_out_presenter_with(options)
     InOutPresenter.new Given.a_in_out(options)
   end
