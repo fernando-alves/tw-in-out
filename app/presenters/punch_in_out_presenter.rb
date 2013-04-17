@@ -1,5 +1,4 @@
-class InOutPresenter
-  include ActionView::Helpers::UrlHelper
+class PunchInOutPresenter
   delegate :punch_in, :punch_out, to: :"@in_out"
 
   def initialize(in_out)

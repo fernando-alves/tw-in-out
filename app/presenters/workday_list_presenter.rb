@@ -1,4 +1,4 @@
-class WorkdayCounterPresenter
+class WorkdayListPresenter
   attr_reader :workdays
 
   def initialize(user, workdays)

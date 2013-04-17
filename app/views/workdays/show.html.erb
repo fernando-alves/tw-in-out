@@ -2,7 +2,11 @@
 
 <p>
   <b>Day:</b>
-  <%= @presenter.workday.day.to_s(:day) %>
+  <%= @presenter.day.to_s(:day) %>
+</p>
+<p>
+  <b>Worked Hours:</b>
+  <%= @presenter.worked_hours %>
 </p>
 <%= render :partial => "punches/list", :locals => { :in_outs => @presenter.in_outs_presenters } %>
 

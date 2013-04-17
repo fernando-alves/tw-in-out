@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe InOutPresenter do
+describe PunchInOutPresenter do
   context "time formating" do
     context "when in out is completed" do
       in_out = Given.a_in_out_presenter_with punch_in: "09:00", punch_out: "12:00"

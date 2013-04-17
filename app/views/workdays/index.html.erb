@@ -4,13 +4,15 @@
 <table class="table table-striped">
   <tr>
     <th>Day</th>
+    <th>Worked Hours</th>
     <th></th>
   </tr>
 
-<% @workdays.each do |workday| %>
+<% @presenter.workdays.each do |workday_presenter| %>
   <tr>
-    <td><%= workday.day.to_s(:day) %></td>
-    <td><%= link_to 'Show', workday %></td>
+    <td><%= workday_presenter.day.to_s(:day) %></td>
+    <td><%= workday_presenter.worked_hours %></td>
+    <td><%= link_to 'Show', workday_presenter.workday %></td>
   </tr>
 <% end %>
 </table>

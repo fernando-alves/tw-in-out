@@ -3,7 +3,9 @@ class WorkdaysController < ApplicationController
   respond_to :html, :json
 
   def index
-    @workdays = current_user.workdays.uniq
+    workdays = current_user.workdays.uniq
+    @presenter = WorkdayListPresenter.new(current_user, workdays)
+    respond_with @presenter.workdays
   end
 
   def show

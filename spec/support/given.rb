@@ -24,6 +24,6 @@ class Given
   end
 
   def self.a_in_out_presenter_with(options)
-    InOutPresenter.new Given.a_in_out(options)
+    PunchInOutPresenter.new Given.a_in_out(options)
   end
 end
