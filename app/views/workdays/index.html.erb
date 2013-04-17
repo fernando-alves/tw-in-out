@@ -1,10 +1,14 @@
 <%= link_to 'New Punch', new_punch_path %>
-<h1>Listing workdays</h1>
+<h2>Listing workdays</h2>
 
 <table class="table table-striped">
   <tr>
     <th>Day</th>
-    <th>Worked Hours</th>
+    <th>Hours</th>
+    <th>IN</th>
+    <th>OUT</th>
+    <th>IN</th>
+    <th>OUT</th>
     <th></th>
   </tr>
 
@@ -12,7 +16,19 @@
   <tr>
     <td><%= workday_presenter.day.to_s(:day) %></td>
     <td><%= workday_presenter.worked_hours %></td>
-    <td><%= link_to 'Show', workday_presenter.workday %></td>
+    <% workday_presenter.in_outs_presenters.each do |in_out| %>
+      <td>
+        <% if in_out.punch_in %>
+          <%= link_to in_out.in, edit_punch_path(in_out.punch_in) %>
+        <% end %>
+      </td>
+      <td>
+        <% if in_out.punch_out %>
+          <%= link_to in_out.out, edit_punch_path(in_out.punch_out) %>
+        <% end %>
+      </td>
+    <% end %>
+    <td><%= link_to 'Edit', workday_presenter.workday %></td>
   </tr>
 <% end %>
 </table>
