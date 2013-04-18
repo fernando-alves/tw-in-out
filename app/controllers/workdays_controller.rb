@@ -10,8 +10,7 @@ class WorkdaysController < ApplicationController
 
   def show
     workday = Workday.find(params[:id])
-    punches = Punch.all_by(user: current_user, workday: workday)
-    @presenter = WorkdayPresenter.new(workday, punches)
+    @presenter = WorkdayPresenter.new(current_user, workday)
     respond_with @presenter.workday
   end
 

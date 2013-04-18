@@ -8,7 +8,11 @@ class Given
   end
 
   def self.a_workday_counter(*in_outs)
-    Workday::Counter.new in_outs: in_outs
+    Workday.new.hours_of in_outs
+  end
+
+  def self.an_hour_at(hour)
+    Time.zone.parse("2013-1-1 #{hour}")
   end
 
   def self.a_punch(options)

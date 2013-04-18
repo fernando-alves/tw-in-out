@@ -4,8 +4,7 @@ class WorkdayListPresenter
   def initialize(user, workdays)
     @workdays = []
     workdays.each do |workday|
-      punches = Punch.all_by(user: user, workday: workday)
-      @workdays <<  WorkdayPresenter.new(workday, punches)
+      @workdays <<  WorkdayPresenter.new(user, workday)
     end
   end
 
