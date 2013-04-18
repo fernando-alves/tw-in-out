@@ -12,7 +12,7 @@ class Given
   end
 
   def self.an_hour_at(hour)
-    Time.zone.parse("2013-1-1 #{hour}")
+    Time.zone.parse("2013-1-1 #{hour}").in_time_zone
   end
 
   def self.a_punch(options)

@@ -7,11 +7,15 @@ class WorkdayPresenter
   end
 
   def worked_hours
-    TimeFormatter.format @workday.worked_hours_of(@user)
+    TimeFormatter.format hours
   end
 
   def in_outs_presenters
     @in_outs_presenters ||= create_in_outs_presenters
+  end
+
+  def hours
+    @workday.worked_hours_of(@user)
   end
 
   private
