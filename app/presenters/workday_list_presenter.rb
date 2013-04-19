@@ -1,5 +1,5 @@
 class WorkdayListPresenter
-  include Hour::Counter
+  include Hour::Countable
   attr_reader :workdays
 
   def initialize(user, workdays)
@@ -10,7 +10,7 @@ class WorkdayListPresenter
   end
 
   def worked_hours
-    TimeFormatter.format hours_of(workdays)
+    TimeFormatter.format_total hours_of(workdays)
   end
 
 end

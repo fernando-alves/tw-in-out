@@ -12,7 +12,7 @@ describe WorkdayPresenter do
                                 "13:00",
                                 "18:00"))
       end
-      workday.stub(:worked_hours_of).with(anything) { Given.an_hour_at "08:00" }
+      workday.stub(:worked_hours_of).with(anything) { 8 * 3600 }
       WorkdayPresenter.new(user, workday)
     end
 
@@ -21,7 +21,7 @@ describe WorkdayPresenter do
     it { presenter.in_outs_presenters[0].out.should == "12:00" }
     it { presenter.in_outs_presenters[1].in.should == "13:00" }
     it { presenter.in_outs_presenters[1].out.should == "18:00" }
-    it { presenter.worked_hours.should == "08:00" }
+    it { presenter.worked_hours.should == 8.0 }
   end
 
 end

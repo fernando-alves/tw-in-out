@@ -15,7 +15,7 @@ class Punch::InOut
   end
 
   def hours
-    completed? ? (punch_out.time.to_i - punch_in.time.to_i) : nil
+    completed? ? (punch_out.time.to_f - punch_in.time.to_f) : nil
   end
 
   def completed?

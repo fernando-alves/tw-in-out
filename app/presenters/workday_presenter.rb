@@ -7,7 +7,7 @@ class WorkdayPresenter
   end
 
   def worked_hours
-    TimeFormatter.format hours
+    TimeFormatter.format_total hours
   end
 
   def in_outs_presenters

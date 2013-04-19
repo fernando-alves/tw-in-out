@@ -4,30 +4,30 @@ describe WorkdayListPresenter do
     presenter = WorkdayListPresenter.new(User.new, [Workday.new])
     workday = presenter.workdays.first
     it { workday.should be_a WorkdayPresenter }
-    it { workday.worked_hours.should == "00:00" }
+    it { workday.worked_hours.should == 0 }
   end
 
   context "when has a list of workdays with punches" do
     let(:user) { mock_model(User) }
     let(:workday) do
       workday = mock_model(Workday)
-      workday.stub(:in_outs_of).with(anything) do
-        Punch::InOut.create_for(Given.a_punches_at(
-                                "09:00",
-                                "12:00",
-                                "13:00",
-                                "18:00"))
-      end
-      workday.stub(:worked_hours_of).with(anything) { (Given.an_hour_at "08:00 UTC").to_i }
+      workday.stub(:worked_hours_of).with(anything) { 8.8 * 3600 }
       workday
     end
-    let(:presenter) { WorkdayListPresenter.new(user, [workday, workday]) }
+    let(:workdays) do
+      workdays = []
+      5.times { workdays << workday }
+      workdays
+    end
+    let(:presenter) { WorkdayListPresenter.new(user, workdays) }
+
+    it { presenter.should have(5).workdays }
     it "should calculate how many hours was worked for a single workday" do
       first_workday = presenter.workdays.first
-      first_workday.worked_hours.should == "08:00"
+      first_workday.worked_hours.should == 8.8
     end
     it "should calculate how many hours was worked in general" do
-      presenter.worked_hours.should == "16:00"
+      presenter.worked_hours.should == 44.0
     end
   end
 

@@ -1,5 +1,5 @@
 class Workday < ActiveRecord::Base
-  include Hour::Counter
+  include Hour::Countable
 
   attr_accessible :day
 

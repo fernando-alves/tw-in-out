@@ -14,7 +14,7 @@ class PunchInOutPresenter
   end
 
   def hours
-    TimeFormatter.format(@in_out.hours || 0)
+    TimeFormatter.format_total(@in_out.hours || 0)
   end
 
 end
