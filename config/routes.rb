@@ -4,7 +4,7 @@ TwInOutWeb::Application.routes.draw do
 
   root :to => 'home#index'
   get "home/index"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

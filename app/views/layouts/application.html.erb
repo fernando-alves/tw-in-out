@@ -28,7 +28,7 @@
                     <a href=<%="#{workdays_path}"%>>My workdays<span class="navbar-unread">1</span></a>
                   </li>
                   <li>
-                    <a href="#"><%= current_user.email %></a>
+                    <%= link_to 'Account settings', edit_user_registration_path %>
                   </li>
                   <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
                 </ul>

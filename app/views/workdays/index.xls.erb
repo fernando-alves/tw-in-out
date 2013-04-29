@@ -3,16 +3,16 @@
     <td>0166 - THOUGHTWORKS BRASIL SOFTWARE LTDA</td>
   </tr>
   <tr>
-    <td>NOME: Alabê Rezende Duarte</td>
+  <td>NOME: <%= current_user.name %></td>
   </tr>
   <tr>
-    <td>FUNÇÃO: Consultor Desenvolvedor</td>
+  <td>FUNÇÃO: <%= current_user.role %></td>
   </tr>
   <tr>
-    <td>CPTS/Série/UF: 10033443/002-0/BA</td>
+  <td>CPTS/Série/UF: <%= current_user.labor_card %></td>
   </tr>
   <tr>
-    <td>Admissão: 03/12/2012</td>
+  <td>Admissão: <%= current_user.admission_date.to_s(:day) %></td>
   </tr>
 </table>
 <br/>

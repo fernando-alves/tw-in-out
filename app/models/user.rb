@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :registerable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  attr_accessible :email, :password
+  attr_accessible :email, :password, :name, :role, :labor_card, :admission_date
   has_many :punches
   has_many :workdays, through: :punches
   validates :email, format: { with: /@thoughtworks.com/ }
