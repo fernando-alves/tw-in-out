@@ -15,7 +15,6 @@ describe Punch::LunchTime do
       punch = Punch.first
       punch.time.to_date.to_s(:day).should == "04/04/2013"
       punch.time.to_s(:time).should == "12:00"
-      punch.kind.should == Punch::OUT
     end
     it "should create a lunch time out on 1:00 pm" do
       lunch_time = Punch::LunchTime.new(user, workday)
@@ -23,7 +22,6 @@ describe Punch::LunchTime do
       punch = Punch.last
       punch.time.to_date.to_s(:day).should == "04/04/2013"
       punch.time.to_s(:time).should == "13:00"
-      punch.kind.should == Punch::IN
     end
 
   end

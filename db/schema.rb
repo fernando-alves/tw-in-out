@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404132413) do
+ActiveRecord::Schema.define(:version => 20130429190841) do
 
   create_table "punches", :force => true do |t|
     t.datetime "time"
     t.integer  "user_id"
-    t.string   "kind"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "workday_id"

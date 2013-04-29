@@ -15,10 +15,6 @@
     <%= f.label :time %><br />
     <%= f.datetime_select :time %>
   </div>
-  <div class="field">
-    <%= f.label :kind %><br />
-    <%= f.select :kind, Punch.kinds, {:prompt => '--'} %>
-  </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-large btn-block btn-primary" %>
   </div>

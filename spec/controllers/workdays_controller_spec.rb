@@ -16,7 +16,7 @@ describe WorkdaysController do
       let(:workday) { a_punch.workday }
       before do
         2.times do
-          Punch.create(time: Time.now, kind: "IN", user_id: @current_user.id, workday_id: workday.id)
+          Punch.create(time: Time.now, user_id: @current_user.id, workday_id: workday.id)
         end
       end
       it "assigns all workdays of the current user as @workdays" do

@@ -10,8 +10,7 @@ describe Punch::Register do
         "time(2i)"=>"4",
         "time(3i)"=>"4",
         "time(4i)"=>"14",
-        "time(5i)"=>"41",
-        "kind"=>"IN"
+        "time(5i)"=>"41"
       }
     end
 

@@ -5,12 +5,6 @@
   <%= @punch.time %>
 </p>
 
-<p>
-  <b>Kind:</b>
-  <%= @punch.kind %>
-</p>
-
-
 <%= link_to 'New', new_punch_path %> |
 <%= link_to 'Edit', edit_punch_path(@punch) %> |
 <%= link_to 'Destroy', @punch, method: :delete, data: { confirm: 'Are you sure?' } %> |

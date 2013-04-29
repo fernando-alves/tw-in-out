@@ -6,7 +6,7 @@ describe PunchesController do
   let(:workday) { create(:workday) }
 
   def valid_attributes
-    { "time"=> "2013-01-01 09:00:00", "kind"=> "IN", "workday_id" => "#{workday.id}" }
+    { "time"=> "2013-01-01 09:00:00", "workday_id" => "#{workday.id}" }
   end
 
   describe "GET show" do
@@ -21,41 +21,6 @@ describe PunchesController do
     it "assigns a new punch as @punch" do
       get :new
       assigns(:punch).should be_a_new(Punch)
-    end
-    context "when it is the first punch of the day" do
-      it "should prepare a new punch kind of IN" do
-        get :new
-        assigns(:punch).kind.should == "IN"
-      end
-    end
-    context "when it is the second punch of the day" do
-      before do
-        punch = build(:punch)
-        punch.user = @current_user
-        punch.kind = Punch::IN
-        punch.save
-      end
-      it "should prepare a new punch kind of OUT" do
-        get :new
-        assigns(:punch).kind.should == Punch::OUT
-      end
-    end
-    context "when it is the third punch of the day" do
-      before do
-        punch = build(:punch)
-        punch.user = @current_user
-        punch.kind = Punch::IN
-        punch.save
-
-        another_punch = build(:punch)
-        another_punch.user = @current_user
-        another_punch.kind = Punch::OUT
-        another_punch.save
-      end
-      it "should prepare a new punch kind of OUT" do
-        get :new
-        assigns(:punch).kind.should == Punch::IN
-      end
     end
   end
 
