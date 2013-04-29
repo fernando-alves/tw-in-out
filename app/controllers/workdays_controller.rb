@@ -1,6 +1,6 @@
 class WorkdaysController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :html, :json
+  respond_to :html, :json, :xls
 
   def index
     workdays = current_user.workdays.uniq

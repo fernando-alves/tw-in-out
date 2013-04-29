@@ -1,0 +1,47 @@
+<table>
+  <tr>
+    <td>0166 - THOUGHTWORKS BRASIL SOFTWARE LTDA</td>
+  </tr>
+  <tr>
+    <td>NOME: Alabê Rezende Duarte</td>
+  </tr>
+  <tr>
+    <td>FUNÇÃO: Consultor Desenvolvedor</td>
+  </tr>
+  <tr>
+    <td>CPTS/Série/UF: 10033443/002-0/BA</td>
+  </tr>
+  <tr>
+    <td>Admissão: 03/12/2012</td>
+  </tr>
+</table>
+<br/>
+<table>
+  <tr>
+    <th style="text-align: right;">Dia</th>
+    <th style="text-align: right;">Entrada</th>
+    <th style="text-align: right;">Saída</th>
+    <th style="text-align: right;">Entrada</th>
+    <th style="text-align: right;">Saída</th>
+    <th style="text-align: right;">Horas</th>
+    <th>Assinatura</th>
+  </tr>
+  <% @presenter.workdays.each do |workday_presenter| %>
+    <tr>
+      <td style="text-align: right;"><%= workday_presenter.day.to_s(:day) %></td>
+      <% workday_presenter.in_outs_presenters.each do |in_out| %>
+        <td><%= in_out.in %></td>
+        <td><%= in_out.out %></td>
+      <% end %>
+      <td><%= workday_presenter.worked_hours %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+<table>
+  <tr>
+  <td colspan="5" style="text-align: right"><b>Horas total</b></td>
+    <td colspan="1"><%= @presenter.worked_hours %></td>
+  </tr>
+</table>
+
