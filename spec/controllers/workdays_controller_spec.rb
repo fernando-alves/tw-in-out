@@ -20,7 +20,7 @@ describe WorkdaysController do
         end
       end
       it "assigns all workdays of the current user as @workdays" do
-        get :index
+        get :index, {year: 2013, month: 4}
         assigns(:presenter).should have(1).workdays
       end
     end
