@@ -125,7 +125,9 @@ describe PunchesController do
 
     it "redirects to the punches list" do
       Punch.stub(:find).with("1") { punch }
-      punch.stub(:workday) { mock_model(Workday, id: 1) }
+      workday = mock_model(Workday, id: 1)
+      punch.stub(:workday) { workday }
+
       delete :destroy, {:id => punch.to_param}
       response.should redirect_to(workday)
     end

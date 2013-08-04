@@ -1,6 +1,24 @@
+== Installing
+
+  postgres:
+    $ brew install postgres
+
+  Change user permission
+    $ sudo chmod -R 0700 /usr/local/var/postgres/
+
+  Start server
+    $ pg_ctl -D /usr/local/var/postgres -l logfile start
+
+  Stop server
+    $ pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
+== Setting up the project
   $ bundle
 
 == Testing
+  $ rake spec
+
+== Continuous testing
   $ guard
 
 == Runnig

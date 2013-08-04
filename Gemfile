@@ -4,11 +4,11 @@ ruby "2.0.0"
 gem 'rails', '3.2.13'
 gem 'devise', '2.0.0'
 gem 'omniauth-google-oauth2'
+gem "pg", "~> 0.16.0"
 
 group :development, :test do
   gem "rspec-rails", "~> 2.11.0"
   gem 'factory_girl_rails', '~> 4.2.0'
-  gem 'sqlite3'
   gem 'jasmine'
   gem 'pry'
 end
@@ -28,7 +28,6 @@ group :test do
 end
 
 group :production do
-  gem "pg", "~> 0.14.1"
   gem 'thin'
 end
 

@@ -3,6 +3,7 @@ class WorkdaysController < ApplicationController
   respond_to :html, :json, :xls
 
   def index
+    # Workday.where('extract(month from day) = ?', Time.now.utc.month)
     workdays = current_user.workdays.uniq
     @presenter = WorkdayListPresenter.new(current_user, workdays)
     respond_with @presenter.workdays
