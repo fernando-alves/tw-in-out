@@ -12,12 +12,12 @@ class Given
   end
 
   def self.an_hour_at(hour)
-    Time.parse("2013-1-1 #{hour}").in_time_zone
+    Time.zone.parse("2013-1-1 #{hour}").in_time_zone
   end
 
   def self.a_punch(options)
     if options[:at]
-      Punch.new time: Time.parse("2013-1-#{options[:on]} #{options[:at]}")
+      Punch.new time: Time.zone.parse("2013-1-#{options[:on]} #{options[:at]}")
     end
   end
 

@@ -1,6 +1,6 @@
 class TimeFormatter
   def self.format(elapsed_time)
-    Time.at(elapsed_time).strftime("%H:%M")
+    Time.zone.at(elapsed_time).strftime("%H:%M")
   end
 
   def self.format_total(elapsed_time)
