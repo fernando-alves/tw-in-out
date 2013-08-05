@@ -62,11 +62,13 @@ class WorkdaysController < ApplicationController
 
   private
   def year
-    params[:year] || Time.zone.now.year
+    @year ||= params[:year]
+    @year || Time.zone.now.year
   end
 
   def month
-    params[:month] || Time.zone.now.month
+    @month ||= params[:month]
+    @month || Time.zone.now.month
   end
 
 end
