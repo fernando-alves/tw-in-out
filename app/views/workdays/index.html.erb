@@ -1,6 +1,11 @@
 <%= link_to 'New Punch', new_punch_path %>
 <h2>Listing workdays</h2>
 
+<form action="/workdays">
+  <input type="month" name="date" value="<%= @date %>">
+  <input type="submit" value="Filter">
+</form>
+
 <b>Worked hours: </b><%= @presenter.worked_hours %>
 <table class="table table-striped">
   <tr>

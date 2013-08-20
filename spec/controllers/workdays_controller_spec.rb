@@ -20,10 +20,30 @@ describe WorkdaysController do
         end
       end
       it "assigns all workdays of the current user as @workdays" do
-        get :index, {year: 2013, month: 4}
+        get :index, {date: '2013-04'}
         assigns(:presenter).should have(1).workdays
       end
+
+      describe "performing default search with current date" do
+        current_time = Time.zone.now
+        year = current_time.year
+        month = (current_time.month).to_s.rjust(2, '0')
+
+        context "when has no params" do
+          it "assigns default date parameter with the current time" do
+            get :index
+            assigns(:date).should == "#{year}-#{month}"
+          end
+        end
+        context "when params is empty" do
+          it "assigns default date parameter" do
+            get :index, {date: nil}
+            assigns(:date).should == "#{year}-#{month}"
+          end
+        end
+      end
     end
+
   end
 
   describe "GET show" do

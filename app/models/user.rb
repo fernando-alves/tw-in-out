@@ -17,7 +17,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def workdays_at(year: Time.zone.now.year, month: Time.zone.now.month)
+  def workdays_at(date)
+    current_time = Time.zone.now
+    year = date[:year] || current_time.year
+    month = date[:month] || current_time.month
+
     Workday.joins(:punches).where("user_id = ? and extract(year from day) = ? and extract(month from day) = ?", id, year, month).uniq
   end
 

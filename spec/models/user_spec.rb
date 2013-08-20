@@ -10,36 +10,41 @@ describe User do
 
   context "when the current user has many punches in different months" do
     let(:user) { create(:user) }
-    let(:punch_on_june) { build(:punch_on_june) }
-    let(:punch_on_july) { build(:punch_on_july) }
-    let(:punch_on_july_last_year) { build(:punch_on_july) }
-
     let(:another_user) { create(:other_user) }
-    let(:another_punch_on_june) { build(:another_punch_on_june) }
 
     before do
-      punch_on_july_last_year.user = user
-      punch_on_july_last_year.workday = Workday.create(day: "2012-07-30")
-      punch_on_july_last_year.save
-
-      punch_on_july.user = user
-      punch_on_july.workday = Workday.create(day: "2013-07-30")
-      punch_on_july.save
-
-      punch_on_june.user = user
-      punch_on_june.workday = Workday.create(day: "2013-06-04")
-      punch_on_june.save
-
-      another_punch_on_june.user = another_user
-      another_punch_on_june.workday = Workday.create(day: "2013-06-08")
-      another_punch_on_june.save
+      create_punch day: "2012-07-30"
+      create_punch day: "2013-07-30"
+      create_punch day: "2013-06-04"
+      create_punch day: "2013-06-08", user: another_user
+      create_punch
     end
 
     it "should return only punches at the month" do
       workdays = user.workdays_at(year: 2013, month: 7)
-      punches = workdays.first.punches
+      first_workday = workdays.first
+      punches = first_workday.punches
 
-      punches.first.should == punch_on_july
+      first_punch = punches.first
+
+      first_punch.time.should == "Tue, 30 Jul 2013 10:00:00 BRT -03:00"
+    end
+    it "should return only punches at the current month" do
+      workdays = user.workdays_at(year: nil, month: nil)
+      first_workday = workdays.first
+      punches = first_workday.punches
+
+      first_punch = punches.first
+      day = first_punch.workday.day
+
+      day.strftime("%d/%m/%y").should == Time.zone.now.strftime("%d/%m/%y")
     end
   end
+
+  def create_punch(user: user, day: Time.zone.now)
+    workday = Workday.create(day: day)
+    punch = Punch.new(time: "#{day} 10:00", user_id: user.id, workday_id: workday.id)
+    punch.save
+  end
+
 end

@@ -3,6 +3,10 @@ class WorkdaysController < ApplicationController
   respond_to :html, :json, :xls
 
   def index
+    params_to_date = ParamsToDate.new(params[:date])
+    @date = params_to_date.date
+    year, month = params_to_date.year, params_to_date.month
+
     workdays = current_user.workdays_at(year: year, month: month)
     @presenter = WorkdayListPresenter.new(current_user, workdays)
     respond_with @presenter.workdays
@@ -58,17 +62,6 @@ class WorkdaysController < ApplicationController
       format.html { redirect_to workdays_url }
       format.json { head :no_content }
     end
-  end
-
-  private
-  def year
-    @year ||= params[:year]
-    @year || Time.zone.now.year
-  end
-
-  def month
-    @month ||= params[:month]
-    @month || Time.zone.now.month
   end
 
 end
