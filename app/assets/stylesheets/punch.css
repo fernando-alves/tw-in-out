@@ -12,3 +12,8 @@
 #description blockquote {
   margin-bottom: 30px;
 }
+
+.worked-hours {
+  font-size: 16.5px;
+  color: #34495e;
+}

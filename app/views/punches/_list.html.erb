@@ -1,4 +1,4 @@
-<%= link_to 'New Punch', new_punch_path %>
+<%= link_to 'New Punch', new_punch_path, class: "btn btn-primary" %>
 <h1>Listing punches</h1>
 <table class="table table-striped">
   <tr>
@@ -11,15 +11,15 @@
   <tr>
     <td>
       <% if in_out.punch_in %>
-        <%= link_to in_out.in, edit_punch_path(in_out.punch_in) %>
+        <%= link_to in_out.in, edit_punch_path(in_out.punch_in), class: "btn btn-info" %>
       <% end %>
     </td>
     <td>
       <% if in_out.punch_out %>
-        <%= link_to in_out.out, edit_punch_path(in_out.punch_out) %>
+        <%= link_to in_out.out, edit_punch_path(in_out.punch_out), class: "btn btn-info" %>
       <% end %>
     </td>
-    <td><%= in_out.hours %></td>
+    <td><span class="worked-hours"><%= in_out.hours %></span></td>
   </tr>
 <% end %>
 </table>

@@ -8,4 +8,8 @@ class TimeFormatter
     (hours.to_f).round(1)
   end
 
+  def self.format_date_time(elapsed_time)
+    Time.zone.at(elapsed_time).strftime("%d/%m/%y %H:%M")
+  end
+
 end
