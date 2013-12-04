@@ -2,6 +2,8 @@
 
 # Pre-requisites
 
+* Ruby ~> 2.0.0
+* Bundler: `gem install bundler`
 * PostgreSQL: `brew install postgresql`
 * Heroku Toolbelt: `https://toolbelt.heroku.com/`
 	- Or, at least, foreman: `https://github.com/ddollar/foreman`
