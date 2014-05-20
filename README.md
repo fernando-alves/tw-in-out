@@ -1,4 +1,4 @@
-[![Build Status](https://snap-ci.com/6_95OV1Bzon8n9gX1_jvJWppDbvJquwasDJLzpgRSQA/build_image)](https://snap-ci.com/projects/thoughtworks/tw-in-out/build_history)
+[![Build Status](https://snap-ci.com/thoughtworks/tw-in-out/branch/master/build_image)](https://snap-ci.com/thoughtworks/tw-in-out/branch/master)
 
 # Pre-requisites
 
