@@ -1,41 +1,45 @@
-<%= link_to 'New Punch', new_punch_path, class: "btn btn-primary" %>
-<%= link_to 'Export XLS', url_for(format: 'xls', date: @date), class: "btn btn-primary" %>
-<h2>Listing workdays</h2>
+<h2>My workdays</h2>
 
 <form action="/workdays">
   <input type="month" name="date" value="<%= @date %>">
   <input type="submit" value="Filter" class="btn">
 </form>
 
-<b>Worked hours: </b><span class="worked-hours"><%= @presenter.worked_hours %></span>
-<table class="table table-striped">
-  <tr>
-    <th>Day</th>
-    <th>Hours</th>
-    <th>IN</th>
-    <th>OUT</th>
-    <th>IN</th>
-    <th>OUT</th>
-    <th></th>
-  </tr>
+<div class="workdays-options-container">
+  <%= link_to 'New Punch', new_punch_path, class: "btn btn-primary" %>
+  <%= link_to 'Print', url_for(format: 'xls', date: @date), class: "btn btn-primary" %>
+</div>
 
-<% @presenter.workdays.each do |workday_presenter| %>
-  <tr>
-    <td><%= workday_presenter.day.to_s(:day) %></td>
-    <td><span class="worked-hours"><%= workday_presenter.worked_hours %></span></td>
-    <% workday_presenter.in_outs_presenters.each do |in_out| %>
-      <td>
-        <% if in_out.punch_in %>
-          <%= link_to in_out.in, edit_punch_path(in_out.punch_in), class: "btn btn-info" %>
+<b>Worked hours: </b><span class="worked-hours"><%= @presenter.worked_hours %></span>
+<i class="worked-hours-clock ion-clock"></i>
+
+<ul class="worked-hours-list">
+  <% @presenter.workdays.each do |workday_presenter| %>
+    <li>
+
+      <ul class="punch-list">
+        <li>
+          <%= link_to workday_presenter.day.to_s(:day), workday_presenter.workday, title: 'Edit', class: "btn" %>
+        </li>
+        <li>
+          <span class="worked-hours"><%= workday_presenter.worked_hours %></span>
+        </li>
+        <% workday_presenter.in_outs_presenters.each do |in_out| %>
+          <li>
+            <% if in_out.punch_in %>
+              <%= link_to in_out.in, edit_punch_path(in_out.punch_in), class: "btn btn-info" %>
+              <i class="punch-in ion-log-in"></i>
+            <% end %>
+          </li>
+          <li>
+            <% if in_out.punch_out %>
+              <%= link_to in_out.out, edit_punch_path(in_out.punch_out), class: "btn btn-info" %>
+              <i class="punch-out ion-log-out"></i>
+            <% end %>
+          </li>
         <% end %>
-      </td>
-      <td>
-        <% if in_out.punch_out %>
-          <%= link_to in_out.out, edit_punch_path(in_out.punch_out), class: "btn btn-info" %>
-        <% end %>
-      </td>
-    <% end %>
-    <td><%= link_to 'Edit', workday_presenter.workday, class: "btn" %></td>
-  </tr>
-<% end %>
-</table>
+      </ul>
+
+    </li>
+  <% end %>
+</ul>

@@ -5,7 +5,7 @@ install: check.postgres
 	@pg_ctl -D /usr/local/var/postgres stop -s -m fast
 
 run:
-	foreman start -f Procfile.dev
+	foreman start -f Procfile.dev -p 3000
 
 check.postgres:
 	@which pg_ctl > /dev/null || \

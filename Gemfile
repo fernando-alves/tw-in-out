@@ -6,6 +6,7 @@ gem 'devise', '2.0.0'
 gem 'omniauth-google-oauth2'
 gem "pg", "~> 0.16.0"
 gem 'jquery-rails'
+gem 'ionicons-rails'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.11.0"

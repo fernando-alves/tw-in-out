@@ -1,3 +1,7 @@
+.workdays-options-container {
+  float: right;
+}
+
 #punch select {
   width: 115px;
 }
@@ -16,4 +20,36 @@
 .worked-hours {
   font-size: 16.5px;
   color: #34495e;
+}
+
+ul, ol {
+  margin: 0;
+}
+
+.worked-hours-list  {
+  list-style: none;
+}
+
+.punch-list {
+  list-style: none;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.punch-list li {
+  display: inline;
+  margin: 20px;
+  margin-left: 0px;
+}
+
+.punch-in, .punch-out, .worked-hours-clock {
+  font-size: 40px;
+}
+
+.punch-in {
+  color: #1abc9c;
+}
+
+.punch-out {
+  color: #e74c3c;
 }
