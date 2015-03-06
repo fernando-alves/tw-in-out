@@ -3,8 +3,8 @@ require 'spec_helper'
 describe User do
   describe "authentication" do
     context "only ThoughtWorkers can access" do
-      it { User.new(email: "xyz@thoughtworks.com").should be_valid }
-      it { User.new(email: "xyz@gmail.com").should_not be_valid }
+      it { expect(User.new(email: "xyz@thoughtworks.com")).to be_valid }
+      it { expect(User.new(email: "xyz@gmail.com")).to_not be_valid }
     end
   end
 
@@ -27,7 +27,7 @@ describe User do
 
       first_punch = punches.first
 
-      first_punch.time.should == "Tue, 30 Jul 2013 10:00:00 BRT -03:00"
+      expect(first_punch.time).to eq "Tue, 30 Jul 2013 10:00:00 BRT -03:00"
     end
     it "should return only punches at the current month" do
       workdays = user.workdays_at(year: nil, month: nil)
@@ -37,7 +37,7 @@ describe User do
       first_punch = punches.first
       day = first_punch.workday.day
 
-      day.strftime("%d/%m/%y").should == Time.zone.now.strftime("%d/%m/%y")
+      expect(day.strftime("%d/%m/%y")).to eq Time.zone.now.strftime("%d/%m/%y")
     end
   end
 

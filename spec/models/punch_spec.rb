@@ -12,7 +12,7 @@ describe Punch do
       punch = create(:punch)
       workday = punch.workday
       user = punch.user
-      Punch.all_by(user: user, workday: workday).should == [punch]
+      expect(Punch.all_by(user: user, workday: workday)).to eq [punch]
     end
   end
 end

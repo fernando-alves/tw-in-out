@@ -4,9 +4,9 @@ describe ParamsToDate do
 
   let(:subject) { ParamsToDate.new("2013-8") }
 
-  it { subject.year.should == "2013" }
-  it { subject.month.should == "08" }
-  it { subject.date.should == "2013-08" }
+  it { expect(subject.year).to eq "2013" }
+  it { expect(subject.month).to eq "08" }
+  it { expect(subject.date).to eq "2013-08" }
 
   context "when date is invalid" do
     current_time = Time.zone.now

@@ -20,12 +20,6 @@ make
 rake spec
 ```
 
-# Continuous testing
-
-```bash
-guard
-```
-
 # Running
 
 ```bash

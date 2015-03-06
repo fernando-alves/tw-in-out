@@ -215,6 +215,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
+  # config.secret_key = '36f399b4e15f50c61800dc3fc36d96fe14dc68c421e8cab77cddb6106a5e3be1847eae2a0035f37605dd8947adb8bf6fbcf523d07637d7e959d762a7d50e52eb'
+
   require "omniauth-google-oauth2"
   config.omniauth :google_oauth2, ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], { access_type: "offline", approval_prompt: "" }
 

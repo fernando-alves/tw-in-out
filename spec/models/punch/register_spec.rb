@@ -14,12 +14,13 @@ describe Punch::Register do
       }
     end
 
-    it { Punch::Register.punch(user, params).should be_valid }
+    it { expect(Punch::Register.punch(user, params)).to be_valid }
 
     context "when workday doesn't exist yet" do
       it "should create a new workday" do
         punch = Punch::Register.punch(user, params)
-        punch.workday.should be_persisted
+
+        expect(punch.workday).to be_persisted
       end
     end
 
@@ -27,7 +28,8 @@ describe Punch::Register do
       before {Workday.create(day: "2013-04-04") }
       it "should use current workday" do
         punch = Punch::Register.punch(user, params)
-        Workday.count.should be(1)
+
+        expect(Workday.count).to eq 1
       end
     end
 

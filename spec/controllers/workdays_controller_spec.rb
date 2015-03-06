@@ -1,13 +1,15 @@
 require 'spec_helper'
 
-describe WorkdaysController do
-  login
-  let(:workday) { mock_model(Workday, id: 1) }
-  let(:punches) { [mock_model(Punch)] }
+describe WorkdaysController, type: :controller do
+  let(:user) { create(:user) }
+  let(:workday) { double(id: 1) }
+  let(:punches) { [double] }
 
   def valid_attributes
     { day: Time.now.to_s }
   end
+
+  before(:each) { sign_in user }
 
   describe "GET index" do
     context "when the current user has a punch" do
@@ -16,12 +18,13 @@ describe WorkdaysController do
       let(:workday) { a_punch.workday }
       before do
         2.times do
-          Punch.create(time: Time.now, user_id: @current_user.id, workday_id: workday.id)
+          Punch.create(time: Time.now, user_id: user.id, workday_id: workday.id)
         end
       end
       it "assigns all workdays of the current user as @workdays" do
         get :index, {date: '2013-04'}
-        assigns(:presenter).should have(1).workdays
+
+        expect(assigns(:presenter)).to have(1).workdays
       end
 
       describe "performing default search with current date" do
@@ -32,13 +35,15 @@ describe WorkdaysController do
         context "when has no params" do
           it "assigns default date parameter with the current time" do
             get :index
-            assigns(:date).should == "#{year}-#{month}"
+
+            expect(assigns(:date)).to eq "#{year}-#{month}"
           end
         end
         context "when params is empty" do
           it "assigns default date parameter" do
             get :index, {date: nil}
-            assigns(:date).should == "#{year}-#{month}"
+
+            expect(assigns(:date)).to eq "#{year}-#{month}"
           end
         end
       end
@@ -48,35 +53,35 @@ describe WorkdaysController do
 
   describe "GET show" do
     it "assigns the requested workday as @workday" do
-      Workday.stub(:find).with("1") { workday }
-      Punch.stub(:all_by).with(anything) { punches }
-      get :show, {:id => workday.to_param}
-      assigns(:presenter).should be_a WorkdayPresenter
+      allow(Workday).to receive(:find).with('1') { workday }
+      allow(Punch).to receive(:all_by).with(anything) { punches }
+
+      get :show, {:id => '1'}
+
+      expect(assigns(:presenter)).to be_a WorkdayPresenter
     end
   end
 
   describe "GET new" do
     it "assigns a new workday as @workday" do
       get :new, {}
-      assigns(:workday).should be_a_new(Workday)
+
+      expect(assigns(:workday)).to be_a_new(Workday)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested workday as @workday" do
-      Workday.stub(:find).with("1") { workday }
-      get :edit, {:id => workday.to_param}
-      assigns(:workday).should eq(workday)
+      allow(Workday).to receive(:find).with("1") { workday }
+
+      get :edit, {:id => "1"}
+
+      expect(assigns(:workday)).to eq(workday)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "should built a new Workday with valid attributes" do
-        Workday.stub(:find_or_create_by_day).with(anything) { workday }
-        Workday.should_receive(:find_or_create_by_day).with(valid_attributes[:day])
-        post :create, {:workday => valid_attributes}
-      end
       it "creates a new Workday" do
         expect {
           post :create, {:workday => valid_attributes}
@@ -85,85 +90,88 @@ describe WorkdaysController do
 
       it "assigns a newly created workday as @workday" do
         post :create, {:workday => valid_attributes}
-        assigns(:workday).should be_a(Workday)
-        assigns(:workday).should be_persisted
+
+        expect(assigns(:workday)).to be_a(Workday)
+        expect(assigns(:workday)).to be_persisted
       end
 
       it "redirects to the created workday" do
         post :create, {:workday => valid_attributes}
-        response.should redirect_to(Workday.last)
+
+        expect(response).to redirect_to(Workday.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved workday as @workday" do
-        Workday.any_instance.stub(:save).and_return(false)
+        allow(Workday.any_instance).to receive(:save).and_return(false)
+
         post :create, {:workday => {}}
-        assigns(:workday).should be_a_new(Workday)
+
+        expect(assigns(:workday)).to be_a_new(Workday)
       end
 
       it "re-renders the 'new' template" do
-        Workday.any_instance.stub(:save).and_return(false)
+        allow(Workday.any_instance).to receive(:save).and_return(false)
+
         post :create, {:workday => {}}
-        response.should render_template("new")
+
+        expect(response).to render_template("new")
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested workday" do
-        Workday.stub(:find).with("1") { workday }
-        workday.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => workday.to_param, :workday => {'these' => 'params'}}
-      end
+      let(:workday) { create(:workday) }
 
       it "assigns the requested workday as @workday" do
-        Workday.stub(:find).with("1") { workday }
-        workday.stub(:update_attributes).with(workday.to_param) { true }
-        valid_attributes = workday
-        put :update, {:id => workday.to_param, :workday => valid_attributes}
-        assigns(:workday).should eq(workday)
+        put :update, {:id => workday.id, :workday => valid_attributes}
+
+        expect(assigns(:workday)).to eq(workday)
       end
 
       it "redirects to the workday" do
-        Workday.stub(:find).with("1") { workday }
-        workday.stub(:update_attributes).with(workday.to_param) { true }
-        valid_attributes = workday
-        put :update, {:id => workday.to_param, :workday => valid_attributes}
-        response.should redirect_to(workday)
+        put :update, {:id => workday.id, :workday => valid_attributes}
+
+        expect(response).to redirect_to(workday)
       end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        allow(Workday).to receive(:find).with("1") { workday }
+        allow(workday).to receive(:update_attributes).with(anything) { false }
+      end
+
       it "assigns the workday as @workday" do
-        Workday.stub(:find).with("1") { workday }
-        workday.stub(:update_attributes) { false }
-        put :update, {:id => workday.to_param, :workday => {}}
-        assigns(:workday).should eq(workday)
+        put :update, {:id => '1', :workday => {}}
+
+        expect(assigns(:workday)).to eq(workday)
       end
 
       it "re-renders the 'edit' template" do
-        Workday.stub(:find).with("1") { workday }
-        workday.stub(:update_attributes) { false }
-        put :update, {:id => workday.to_param, :workday => {}}
-        response.should render_template("edit")
+        put :update, {:id => '1', :workday => {}}
+
+        expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested workday" do
-      workday = Workday.create! valid_attributes
+      workday = create(:workday)
       expect {
-        delete :destroy, {:id => workday.to_param}
+        delete :destroy, {:id => workday.id}
       }.to change(Workday, :count).by(-1)
     end
 
     it "redirects to the workdays list" do
-      Workday.stub(:find).with("1") { workday }
-      delete :destroy, {:id => workday.to_param}
-      response.should redirect_to(workdays_url)
+      workday = create(:workday)
+
+      delete :destroy, {:id => workday.id}
+
+      expect(response).to redirect_to(workdays_url)
     end
   end
 

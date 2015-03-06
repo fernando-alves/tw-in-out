@@ -1,23 +1,24 @@
 require 'spec_helper'
 
-describe LunchTimesController do
-  login
-  let(:lunch_time) { mock(Punch::LunchTime) }
+describe LunchTimesController, type: :controller do
+  let(:user) { create(:user) }
   let(:workday) { create(:workday) }
 
   def valid_attributes
     { "workday" => {"id"=> workday.id} }
   end
   describe "POST create" do
+    before(:each) { sign_in user }
+
     describe "with valid params" do
       it "should redirect to workdays#show" do
         post :create, valid_attributes
-        response.should redirect_to(workday)
+
+        expect(response).to redirect_to(workday)
       end
       it "should built a new lunch time with current user" do
-        Punch::LunchTime.stub(:new).with(anything) { lunch_time }
-        lunch_time.stub(:save) { true }
-        Punch::LunchTime.should_receive(:new).with(@current_user, workday)
+        expect(Punch::LunchTime).to receive(:new).with(user, workday) { double(save: true) }
+
         post :create, valid_attributes
       end
     end

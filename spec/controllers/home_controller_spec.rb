@@ -1,22 +1,25 @@
 require 'spec_helper'
 
-describe HomeController do
+describe HomeController, type: :controller do
 
   context "when then user doesn't logged in" do
     describe "GET 'index'" do
       it "returns bad request" do
         get 'index'
-        response.should_not be_success
+
+        expect(response).to_not be_success
       end
     end
   end
 
   context "when the user logged in" do
-    login
+    before(:each) { sign_in create(:user) }
+
     describe "GET 'index'" do
       it "returns http success" do
         get 'index'
-        response.should be_success
+
+        expect(response).to be_success
       end
     end
   end
