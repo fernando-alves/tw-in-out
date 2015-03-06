@@ -13,11 +13,11 @@ describe User do
     let(:another_user) { create(:other_user) }
 
     before do
-      create_punch day: "2012-07-30"
-      create_punch day: "2013-07-30"
-      create_punch day: "2013-06-04"
+      create_punch day: "2012-07-30", user: user
+      create_punch day: "2013-07-30", user: user
+      create_punch day: "2013-06-04", user: user
       create_punch day: "2013-06-08", user: another_user
-      create_punch
+      create_punch user: user
     end
 
     it "should return only punches at the month" do
