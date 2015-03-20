@@ -7,6 +7,11 @@ install: check.postgres
 run:
 	foreman start -f Procfile.dev -p 3000
 
+test:
+	@pg_ctl -D /usr/local/var/postgres -l logfile start
+	@bundle exec rake spec
+	@pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
 check.postgres:
 	@which pg_ctl > /dev/null || \
 	(echo '\n> Please install PostgreSQL!\n' && false)
