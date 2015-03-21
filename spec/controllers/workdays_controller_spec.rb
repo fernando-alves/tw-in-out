@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe WorkdaysController, type: :controller do
   let(:user) { create(:user) }
-  let(:workday) { double(id: 1) }
+  let(:workday_id) { '1' }
+  let(:workday) { double(id: workday_id) }
   let(:punches) { [double] }
 
-  def valid_attributes
+  let(:attributes) do
     { day: Time.now.to_s }
   end
 
@@ -35,7 +36,7 @@ describe WorkdaysController, type: :controller do
       end
     end
 
-    context 'when the current user has a punch' do
+    context 'when there is more than one punch' do
       let(:workday) { create(:punch).workday }
       let(:params) { { date: '2013-04' } }
 
@@ -48,19 +49,17 @@ describe WorkdaysController, type: :controller do
               workday_id: workday.id
             )
         }
-      end
 
-      it 'assigns all workdays of the current user as @workdays' do
         get :index, params
-
-        expect(assigns(:presenter)).to have(1).workdays
       end
+
+      it { expect(assigns(:presenter)).to have(1).workdays }
     end
 
   end
 
   describe 'GET show' do
-    let(:workday_id) { '1' }
+    subject(:show_workday) { get :show, { id: workday_id } }
 
     before do
       allow(Workday).to receive(:find)
@@ -69,51 +68,38 @@ describe WorkdaysController, type: :controller do
 
       allow(Punch).to receive(:all_by)
         .and_return(punches)
+
+      show_workday
     end
 
-    it 'assigns the requested workday' do
-      get :show, { :id => workday_id }
-
-      expect(assigns(:presenter)).to be_a WorkdayPresenter
-    end
+    it { expect(assigns(:presenter)).to be_a WorkdayPresenter }
   end
 
   describe 'GET new' do
-    it 'assigns a new workday as @workday' do
-      get :new, {}
+    before { get :new }
 
-      expect(assigns(:workday)).to be_a_new(Workday)
-    end
+    it { expect(assigns(:workday)).to be_a_new(Workday) }
   end
 
   describe 'GET edit' do
-    it 'assigns the requested workday as @workday' do
-      allow(Workday).to receive(:find).with('1') { workday }
+    subject(:edit_workday) { get :edit, { id: workday_id } }
 
-      get :edit, {:id => '1'}
+    before do
+      allow(Workday).to receive(:find)
+        .with(workday_id)
+        .and_return(workday)
 
-      expect(assigns(:workday)).to eq(workday)
+      edit_workday
     end
+
+    it { expect(assigns(:workday)).to eq(workday) }
   end
 
   describe 'POST create' do
-    it 'creates a new Workday' do
-      expect {
-        post :create, { workday: valid_attributes }
-      }.to change(Workday, :count).by(1)
-    end
+    subject(:create_workday) { post :create, { workday: attributes } }
 
-    it 'assigns a newly created workday' do
-      post :create, { workday: valid_attributes }
-
-      expect(assigns(:workday)).to be_persisted
-    end
-
-    it 'redirects to the created workday' do
-      post :create, { workday: valid_attributes }
-
-      expect(response).to redirect_to(Workday.last)
-    end
+    it { expect { create_workday }.to change(Workday, :count).by(1) }
+    it { expect(create_workday).to redirect_to(Workday.last) }
 
     describe 'with invalid params' do
       let(:workday) { Workday.new }
@@ -121,80 +107,52 @@ describe WorkdaysController, type: :controller do
       before do
         allow(Workday).to receive(:find_or_create_by_day)
           .and_return(workday)
+
+        create_workday
       end
 
-      it 'assigns a newly created but unsaved workday as @workday' do
-        post :create, { workday: {} }
-
-        expect(assigns(:workday)).to be_a_new(Workday)
-      end
-
-      it 're-renders a template' do
-        post :create, { workday: {} }
-
-        expect(response).to render_template('new')
-      end
+      it { expect(assigns(:workday)).to be_a_new(Workday) }
+      it { expect(response).to render_template('new') }
     end
   end
 
   describe 'PUT update' do
-    let(:workday) { create(:workday) }
-    let(:params) { { id: workday.id,  workday: valid_attributes } }
+    subject(:update_workday) { put :update, params }
 
-    it 'assigns the requested workday as @workday' do
-      put :update, params
+    let(:workday) { create(:workday) }
+    let(:params) { { id: workday.id,  workday: attributes } }
+
+    it 'assigns workday' do
+      update_workday
 
       expect(assigns(:workday)).to eq(workday)
     end
 
-    it 'redirects to the workday' do
-      put :update, params
-
-      expect(response).to redirect_to(workday)
-    end
+    it { expect(update_workday).to redirect_to(workday) }
 
     describe 'with invalid params' do
-      let(:params) { { id: workday_id,  workday: {} } }
-      let(:workday_id) { '1' }
+      let(:invalid_workday) { double(update_attributes: false) }
 
       before do
         allow(Workday).to receive(:find)
-          .with(workday_id)
-          .and_return(workday)
+          .and_return(invalid_workday)
 
-        allow(workday).to receive(:update_attributes)
-          .and_return(false)
+        update_workday
       end
 
-      it 'assigns the workday' do
-        put :update, params
-
-        expect(assigns(:workday)).to eq(workday)
-      end
-
-      it 're-renders a template' do
-        put :update, params
-
-        expect(response).to render_template('edit')
-      end
+      it { expect(response).to render_template('edit') }
     end
   end
 
   describe 'DELETE destroy' do
-    it 'destroys the requested workday' do
-      workday = create(:workday)
-      expect {
-        delete :destroy, {:id => workday.id}
-      }.to change(Workday, :count).by(-1)
-    end
+    subject(:delete_workday) { delete :destroy, {id: workday.id} }
 
-    it 'redirects to the workdays list' do
-      workday = create(:workday)
+    let(:workday) { build(:workday) }
 
-      delete :destroy, {:id => workday.id}
+    before { workday.save }
 
-      expect(response).to redirect_to(workdays_url)
-    end
+    it { expect { delete_workday }.to change(Workday, :count).by(-1) }
+    it { expect(delete_workday).to redirect_to(workdays_url) }
   end
 
 end
