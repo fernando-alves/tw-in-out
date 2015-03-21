@@ -3,7 +3,7 @@ class PunchesController < ApplicationController
   respond_to :html, :json
 
   def index
-    redirect_to controller: "workdays", action: "index"
+    redirect_to controller: 'workdays', action: 'index'
   end
 
   def show
@@ -25,7 +25,7 @@ class PunchesController < ApplicationController
         format.html { redirect_to @punch, notice: 'Punch was successfully created.' }
         format.json { render json: @punch, status: :created, location: @punch }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @punch.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +39,7 @@ class PunchesController < ApplicationController
         format.html { redirect_to @punch, notice: 'Punch was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @punch.errors, status: :unprocessable_entity }
       end
     end
