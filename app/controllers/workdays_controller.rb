@@ -29,28 +29,20 @@ class WorkdaysController < ApplicationController
   def create
     @workday = Workday.find_or_create_by_day(params[:workday][:day])
 
-    respond_to do |format|
-      if @workday.valid?
-        format.html { redirect_to @workday, notice: 'Workday was successfully created.' }
-        format.json { render json: @workday, status: :created, location: @workday }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @workday.errors, status: :unprocessable_entity }
-      end
+    if @workday.valid?
+      redirect_to @workday, notice: 'Workday was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   def update
     @workday = Workday.find(params[:id])
 
-    respond_to do |format|
-      if @workday.update_attributes(params[:workday])
-        format.html { redirect_to @workday, notice: 'Workday was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @workday.errors, status: :unprocessable_entity }
-      end
+    if @workday.update_attributes(params[:workday])
+      redirect_to @workday, notice: 'Workday was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
