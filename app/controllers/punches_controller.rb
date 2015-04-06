@@ -20,38 +20,28 @@ class PunchesController < ApplicationController
 
   def create
     @punch = Punch::Register.punch(current_user, params[:punch])
-    respond_to do |format|
-      if @punch.save
-        format.html { redirect_to @punch, notice: 'Punch was successfully created.' }
-        format.json { render json: @punch, status: :created, location: @punch }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @punch.errors, status: :unprocessable_entity }
-      end
+    if @punch.save
+      redirect_to @punch, notice: 'Punch was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
     @punch = Punch.find(params[:id])
-
-    respond_to do |format|
-      if @punch.update_attributes(params[:punch])
-        format.html { redirect_to @punch, notice: 'Punch was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @punch.errors, status: :unprocessable_entity }
-      end
+    if @punch.update_attributes(params[:punch])
+      redirect_to @punch, notice: 'Punch was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @punch = Punch.find(params[:id])
     workday = @punch.workday
+
     @punch.destroy
-    respond_to do |format|
-      format.html { redirect_to workday }
-      format.json { head :no_content }
-    end
+
+    redirect_to workday
   end
 end
