@@ -4,7 +4,6 @@
 
 * Ruby ~> 2.1.0 (see `.ruby-version`)
 * Bundler: `gem install bundler`
-* Docker: `brew install postgresql`
 
 # Installing
 
