@@ -1,9 +1,19 @@
 class Punch::Register
-  def self.punch(user, attributes)
-    punch = Punch.new attributes.merge(user_id: user.id)
-    if punch.time
-      punch.workday = Workday.find_or_create_by_day(punch.time.to_date)
+  class << self
+    def punch(user, attributes)
+      a_new_punch_with(user, attributes).tap do |punch|
+        punch.workday = workday(punch.time) if punch.time
+      end
     end
-    punch
+
+    private
+
+    def a_new_punch_with(user, attributes)
+      Punch.new(attributes.merge(user_id: user.id))
+    end
+
+    def workday(time)
+      Workday.find_or_create_by_day(time.to_date)
+    end
   end
 end
