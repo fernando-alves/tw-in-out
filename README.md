@@ -2,26 +2,50 @@
 
 # Pre-requisites
 
-* Ruby ~> 2.0.0
+* Ruby ~> 2.1.0 (see `.ruby-version`)
 * Bundler: `gem install bundler`
-* PostgreSQL: `brew install postgresql`
-* Heroku Toolbelt: `https://toolbelt.heroku.com/`
-	- Or, at least, foreman: `https://github.com/ddollar/foreman`
+* Docker: `brew install postgresql`
 
 # Installing
 
-```bash
-make
+```ruby
+$ bundle install
+$ bundle exec rake project:setup
 ```
 
-# Testing
+# Running the tests
 
-```bash
-rake spec
+```ruby
+$ bundle exec rake spec
 ```
 
 # Running
 
-```bash
-make run
+```ruby
+$ bundle exec rake project:start
+```
+
+### Environment
+In order to run either the application or tests locally you must create a .env
+file as following:
+
+```
+TW_IN_OUT_DB_HOST=localhost
+```
+
+### Docker Toolbox
+If you want to use [Docker](https://docs.docker.com/), install version 1.3 or greater:
+
+* [Getting started guide](https://www.docker.com/toolbox)
+
+If you are cool and use brew cask:
+
+```
+$ brew cask install dockertoolbox
+```
+
+Start docker with all required images
+
+```
+ $ ./script/development/start_docker.sh
 ```

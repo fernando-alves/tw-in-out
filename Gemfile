@@ -7,8 +7,10 @@ gem 'omniauth-google-oauth2'
 gem 'pg', '~> 0.16.0'
 gem 'jquery-rails'
 gem 'ionicons-rails'
+gem 'foreman'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.2.1'
   gem 'rspec-collection_matchers'
   gem 'factory_girl_rails', '~> 4.2.0'
