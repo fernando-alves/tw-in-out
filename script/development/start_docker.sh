@@ -13,8 +13,8 @@ readonly HAS_MACHINE=$(docker-machine ls | grep -c $MACHINE_NAME)
 readonly HAS_RUNNING_MACHINE=$(docker-machine ls | grep $MACHINE_NAME | grep -c "Running")
 
 if [[ $IS_OLDER_DOCKER -ne 0 ]]; then
-    log_error "Error: Your docker-machine version is older; Please update your docker-machine to > 0.3"
-    exit
+  log_error "Error: Your docker-machine version is older; Please update your docker-machine to > 0.3"
+  exit
 fi
 
 if [ $HAS_MACHINE -eq 0 ]; then
