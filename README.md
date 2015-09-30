@@ -1,9 +1,6 @@
 [![Build Status](https://snap-ci.com/thoughtworks/tw-in-out/branch/master/build_image)](https://snap-ci.com/thoughtworks/tw-in-out/branch/master)
 
-# Pre-requisites
-
-* Ruby ~> 2.1.0 (see `.ruby-version`)
-* Bundler: `gem install bundler`
+App to track your work punches
 
 # Installing
 
