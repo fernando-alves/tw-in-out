@@ -19,7 +19,7 @@ class PunchesController < ApplicationController
   end
 
   def create
-    @punch = Punch::Register.punch(current_user, params[:punch])
+    @punch = Punch::Register.punch(current_user, punch_attributes)
     if @punch.save
       redirect_to @punch, notice: 'Punch was successfully created.'
     else
@@ -29,7 +29,7 @@ class PunchesController < ApplicationController
 
   def update
     @punch = Punch.find(params[:id])
-    if @punch.update_attributes(params[:punch])
+    if @punch.update_attributes(punch_attributes)
       redirect_to @punch, notice: 'Punch was successfully updated.'
     else
       render action: 'edit'
@@ -43,5 +43,11 @@ class PunchesController < ApplicationController
     @punch.destroy
 
     redirect_to workday
+  end
+
+  private
+
+  def punch_attributes
+    params.require(:punch).permit(:time, :workday_id)
   end
 end

@@ -13,7 +13,7 @@ class Punch::Register
     end
 
     def workday(time)
-      Workday.find_or_create_by_day(time.to_date)
+      Workday.find_or_create_by(day: time.to_date)
     end
   end
 end

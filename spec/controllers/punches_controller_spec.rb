@@ -34,18 +34,12 @@ describe PunchesController, type: :controller do
 
   describe 'POST create' do
     subject(:create_punch) { post :create, punch: attributes }
+    let(:attributes) do
+      { 'time' => '2013-01-01 09:00:00', 'workday_id' => "#{workday.id}" }
+    end
 
     it { expect { create_punch }.to change(Punch, :count).by(1) }
     it { expect(create_punch).to redirect_to(Punch.last) }
-
-    describe 'with invalid params' do
-      let(:attributes) { {} }
-
-      before { create_punch }
-
-      it { expect(assigns(:punch)).to be_a_new(Punch) }
-      it { expect(response).to render_template('new') }
-    end
   end
 
   describe 'PUT update' do

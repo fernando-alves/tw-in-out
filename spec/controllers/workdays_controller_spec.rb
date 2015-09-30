@@ -102,7 +102,7 @@ describe WorkdaysController, type: :controller do
       let(:workday) { Workday.new }
 
       before do
-        allow(Workday).to receive(:find_or_create_by_day)
+        allow(Workday).to receive(:find_or_create_by)
           .and_return(workday)
 
         create_workday

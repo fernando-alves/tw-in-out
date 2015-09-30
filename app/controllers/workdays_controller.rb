@@ -28,7 +28,7 @@ class WorkdaysController < ApplicationController
   end
 
   def create
-    @workday = Workday.find_or_create_by_day(params[:workday][:day])
+    @workday = Workday.find_or_create_by(day: params[:workday][:day])
 
     if @workday.valid?
       redirect_to @workday, notice: 'Workday was successfully created.'
@@ -40,7 +40,7 @@ class WorkdaysController < ApplicationController
   def update
     @workday = Workday.find(params[:id])
 
-    if @workday.update_attributes(params[:workday])
+    if @workday.update_attributes(workday_attributes)
       redirect_to @workday, notice: 'Workday was successfully updated.'
     else
       render action: 'edit'
@@ -55,5 +55,11 @@ class WorkdaysController < ApplicationController
       format.html { redirect_to workdays_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def workday_attributes
+    params.require(:workday).permit(:day)
   end
 end

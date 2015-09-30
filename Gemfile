@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
-ruby '2.1.7'
+ruby '2.2.3'
 
-gem 'rails', '3.2.14'
-gem 'devise', '~> 2.0.0'
+gem 'rails', '4.2.4'
+gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'pg', '~> 0.16.0'
 gem 'jquery-rails'
@@ -15,10 +15,10 @@ end
 
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 3.2.1'
+  gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails', '~> 4.2.0'
+  gem 'factory_girl_rails'
   gem 'jasmine'
   gem 'pry'
 end
@@ -34,7 +34,7 @@ end
 
 group :assets do
   gem 'jasmine-jquery-rails'
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails'
   gem 'therubyracer', platforms: :ruby
   gem 'uglifier', '>= 1.0.3'
 end
