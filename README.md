@@ -46,5 +46,5 @@ $ brew cask install dockertoolbox
 Start docker with all required images
 
 ```
- $ ./script/development/start_docker.sh
+$ bundle exec rake docker:start
 ```
