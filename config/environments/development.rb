@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   if Rails.env.development?
-    ENV["CLIENT_ID"] = "663824365082-1osncst9s8kidv0lc06ilmbp97tlt5mi.apps.googleusercontent.com"
-    ENV["CLIENT_SECRET"] = "QYihIjUktUluTCp_iF2Frtyx"
+    ENV["CLIENT_ID"] = "928699409569-jkotgu87rq2ue424mg437rbdgj9glopp.apps.googleusercontent.com"
+    ENV["CLIENT_SECRET"] = "-DyKcmFAZMKbhZz8KKpxFhMt"
   end
 end
