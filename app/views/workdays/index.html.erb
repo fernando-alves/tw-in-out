@@ -28,13 +28,13 @@
           <li>
             <% if in_out.punch_in %>
               <%= link_to in_out.in, edit_punch_path(in_out.punch_in), class: "btn btn-info" %>
-              <i class="punch-in ion-log-in"></i>
+              <i class="punch-in ion-forward"></i>
             <% end %>
           </li>
           <li>
             <% if in_out.punch_out %>
               <%= link_to in_out.out, edit_punch_path(in_out.punch_out), class: "btn btn-info" %>
-              <i class="punch-out ion-log-out"></i>
+              <i class="punch-out ion-reply"></i>
             <% end %>
           </li>
         <% end %>

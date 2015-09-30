@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe WorkdayPresenter do
   describe 'getting in outs' do
     let(:presenter) do

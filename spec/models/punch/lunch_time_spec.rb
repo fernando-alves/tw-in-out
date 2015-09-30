@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Punch::LunchTime do
   context 'creating a lunch time' do
     let(:user) { create(:user) }

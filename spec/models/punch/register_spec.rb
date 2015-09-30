@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Punch::Register do
   describe '.punch' do
     subject(:register_punch) { Punch::Register.punch(user, attributes) }

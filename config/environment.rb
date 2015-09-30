@@ -1,8 +1,8 @@
-# Load the rails application
+# Load the Rails application.
 require File.expand_path('../application', __FILE__)
 
-# Initialize the rails application
-TwInOutWeb::Application.initialize!
+# Initialize the Rails application.
+Rails.application.initialize!
 
 Date::DATE_FORMATS[:day] = "%d/%m/%Y"
 Time::DATE_FORMATS[:time] = "%H:%M"

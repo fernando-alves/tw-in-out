@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe WorkdayListPresenter do
   context 'when has a list of empties workdays' do
     presenter = WorkdayListPresenter.new(User.new, [Workday.new])

@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe PunchInOutPresenter do
   context 'time formating' do
     context 'when in out is completed' do
