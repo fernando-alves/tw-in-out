@@ -7,12 +7,23 @@ describe Punch do
     it { should validate_presence_of :workday }
   end
 
-  describe 'querying' do
-    it 'should retrieve all punches by user and workday' do
-      punch = create(:punch)
-      workday = punch.workday
-      user = punch.user
-      expect(Punch.all_by(user: user, workday: workday)).to eq [punch]
+  describe '.all_by' do
+    subject { Punch.all_by(user: user, workday: workday) }
+    let(:punch) { create(:punch) }
+    let(:user) { punch.user }
+    let(:workday) { punch.workday }
+
+    before { punch }
+
+    it { is_expected.to eq [punch] }
+
+    context 'when there is another punch user' do
+      let(:another_punch) { create(:punch) }
+
+      before { another_punch }
+
+      it { is_expected.to eq [punch] }
+      it { expect(Punch.count).to eq 2 }
     end
   end
 end
