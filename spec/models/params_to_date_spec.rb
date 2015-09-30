@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ParamsToDate do
   let(:subject) { ParamsToDate.new('2013-8') }
 

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe PunchesController, type: :controller do
   let(:punch) { create(:punch) }
   let(:workday) { create(:workday) }

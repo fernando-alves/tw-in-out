@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe HomeController, type: :controller do
   describe "GET 'index'" do
     context "when then user doesn't logged in" do

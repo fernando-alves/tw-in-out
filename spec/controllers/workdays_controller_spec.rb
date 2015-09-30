@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe WorkdaysController, type: :controller do
   let(:user) { create(:user) }
   let(:workday_id) { '1' }

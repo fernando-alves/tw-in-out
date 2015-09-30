@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe Punch::InOut do
   describe 'validations' do
     context 'when is completed' do

@@ -1,10 +1,8 @@
-require 'spec_helper'
-
 describe Punch do
   describe 'validations' do
-    it { should validate_presence_of :user }
-    it { should validate_presence_of :time }
-    it { should validate_presence_of :workday }
+    it { is_expected.to validate_presence_of :user }
+    it { is_expected.to validate_presence_of :time }
+    it { is_expected.to validate_presence_of :workday }
   end
 
   describe '.all_by' do

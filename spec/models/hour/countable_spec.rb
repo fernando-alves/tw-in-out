@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe Hour::Countable do
   describe 'when punches are valids' do
     context 'calculating how many hours is spent on the morning' do
