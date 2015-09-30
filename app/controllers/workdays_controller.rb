@@ -5,7 +5,8 @@ class WorkdaysController < ApplicationController
   def index
     params_to_date = ParamsToDate.new(params[:date])
     @date = params_to_date.date
-    year, month = params_to_date.year, params_to_date.month
+    year = params_to_date.year
+    month = params_to_date.month
 
     workdays = current_user.workdays_at(year: year, month: month)
     @presenter = WorkdayListPresenter.new(current_user, workdays)
@@ -32,7 +33,7 @@ class WorkdaysController < ApplicationController
     if @workday.valid?
       redirect_to @workday, notice: 'Workday was successfully created.'
     else
-      render action: "new"
+      render action: 'new'
     end
   end
 
@@ -42,7 +43,7 @@ class WorkdaysController < ApplicationController
     if @workday.update_attributes(params[:workday])
       redirect_to @workday, notice: 'Workday was successfully updated.'
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 
@@ -55,5 +56,4 @@ class WorkdaysController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 end

@@ -1,0 +1,29 @@
+Metrics/LineLength:
+  Max: 145
+
+Documentation:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Description: Don't use assignment in conditions.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
+  Enabled: false
+  AllowSafeAssignment: true
+
+Style/StructInheritance:
+  Description: Checks for inheritance from Struct.new.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-extend-struct-new
+  Enabled: true
+
+Style/ClassVars:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 27
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'

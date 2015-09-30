@@ -11,36 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429192718) do
-
-  create_table "punches", :force => true do |t|
-    t.datetime "time"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "workday_id"
+ActiveRecord::Schema.define(version: 20_130_429_192_718) do
+  create_table 'punches', force: true do |t|
+    t.datetime 'time'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'workday_id'
   end
 
-  add_index "punches", ["user_id"], :name => "index_punches_on_user_id"
-  add_index "punches", ["workday_id"], :name => "index_punches_on_workday_id"
+  add_index 'punches', ['user_id'], name: 'index_punches_on_user_id'
+  add_index 'punches', ['workday_id'], name: 'index_punches_on_workday_id'
 
-  create_table "users", :force => true do |t|
-    t.string   "email",              :default => "", :null => false
-    t.string   "encrypted_password", :default => "", :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "name"
-    t.string   "role"
-    t.string   "labor_card"
-    t.date     "admission_date"
+  create_table 'users', force: true do |t|
+    t.string 'email',              default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.datetime 'created_at',                         null: false
+    t.datetime 'updated_at',                         null: false
+    t.string 'name'
+    t.string 'role'
+    t.string 'labor_card'
+    t.date 'admission_date'
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index 'users', ['email'], name: 'index_users_on_email', unique: true
 
-  create_table "workdays", :force => true do |t|
-    t.date     "day"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table 'workdays', force: true do |t|
+    t.date 'day'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
-
 end

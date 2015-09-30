@@ -5,7 +5,7 @@ describe PunchesController, type: :controller do
   let(:workday) { create(:workday) }
 
   let(:attributes) do
-    { 'time'=> '2013-01-01 09:00:00', 'workday_id' => "#{workday.id}" }
+    { 'time' => '2013-01-01 09:00:00', 'workday_id' => "#{workday.id}" }
   end
 
   before(:each) { sign_in create(:user) }
@@ -17,7 +17,7 @@ describe PunchesController, type: :controller do
   end
 
   describe 'GET show' do
-    before { get :show, { id: punch.id } }
+    before { get :show, id: punch.id }
 
     it { expect(assigns(:punch)).to eq(punch) }
   end
@@ -29,13 +29,13 @@ describe PunchesController, type: :controller do
   end
 
   describe 'GET edit' do
-    before { get :edit, {id: punch.id} }
+    before { get :edit, id: punch.id }
 
     it { expect(assigns(:punch)).to eq(punch) }
   end
 
   describe 'POST create' do
-    subject(:create_punch) { post :create, { punch: attributes } }
+    subject(:create_punch) { post :create, punch: attributes }
 
     it { expect { create_punch }.to change(Punch, :count).by(1) }
     it { expect(create_punch).to redirect_to(Punch.last) }
@@ -51,7 +51,7 @@ describe PunchesController, type: :controller do
   end
 
   describe 'PUT update' do
-    subject(:update_punch) { put :update, { id: punch.id, punch: attributes } }
+    subject(:update_punch) { put :update, id: punch.id, punch: attributes }
 
     it 'assigns punch' do
       update_punch
@@ -76,7 +76,7 @@ describe PunchesController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    subject(:delete_punch) { delete :destroy, {id: punch.id} }
+    subject(:delete_punch) { delete :destroy, id: punch.id }
 
     let(:punch) { build(:punch) }
     let(:workday) { punch.workday }
@@ -86,5 +86,4 @@ describe PunchesController, type: :controller do
     it { expect { delete_punch }.to change(Punch, :count).by(-1) }
     it { expect(delete_punch).to redirect_to(workday) }
   end
-
 end

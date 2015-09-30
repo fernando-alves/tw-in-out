@@ -1,9 +1,9 @@
 class Punch::InOut
-
   attr_reader :punch_in, :punch_out
 
   def initialize(params)
-    @punch_in, @punch_out = params[:punch_in], params[:punch_out]
+    @punch_in = params[:punch_in]
+    @punch_out = params[:punch_out]
   end
 
   def self.create_for(punches)
@@ -23,8 +23,8 @@ class Punch::InOut
   end
 
   private
+
   SLICE = 2
   FIRST = 0
   SECOND = 1
-
 end

@@ -11,7 +11,7 @@ describe LunchTimesController, type: :controller do
     let(:workday) { create(:workday) }
     let(:lunch_time) { double.as_null_object }
     let(:valid_attributes) do
-      { 'workday' => {'id'=> workday.id} }
+      { 'workday' => { 'id' => workday.id } }
     end
 
     before do

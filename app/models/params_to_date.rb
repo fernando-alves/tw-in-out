@@ -2,7 +2,7 @@ class ParamsToDate
   def initialize(date)
     @date = date
     @current_time = Time.zone.now
-    @pattern = %r/(?<year>\d*)-(?<month>\d*)/
+    @pattern = /(?<year>\d*)-(?<month>\d*)/
   end
 
   def year
@@ -18,6 +18,7 @@ class ParamsToDate
   end
 
   private
+
   def valid_date?
     @date && match
   end

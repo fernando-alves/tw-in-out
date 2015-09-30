@@ -41,25 +41,24 @@ describe WorkdaysController, type: :controller do
       let(:params) { { date: '2013-04' } }
 
       before do
-        2.times {
+        2.times do
           Punch
             .create(
               time: Time.now,
               user_id: user.id,
               workday_id: workday.id
             )
-        }
+        end
 
         get :index, params
       end
 
       it { expect(assigns(:presenter)).to have(1).workdays }
     end
-
   end
 
   describe 'GET show' do
-    subject(:show_workday) { get :show, { id: workday_id } }
+    subject(:show_workday) { get :show, id: workday_id }
 
     before do
       allow(Workday).to receive(:find)
@@ -82,7 +81,7 @@ describe WorkdaysController, type: :controller do
   end
 
   describe 'GET edit' do
-    subject(:edit_workday) { get :edit, { id: workday_id } }
+    subject(:edit_workday) { get :edit, id: workday_id }
 
     before do
       allow(Workday).to receive(:find)
@@ -96,7 +95,7 @@ describe WorkdaysController, type: :controller do
   end
 
   describe 'POST create' do
-    subject(:create_workday) { post :create, { workday: attributes } }
+    subject(:create_workday) { post :create, workday: attributes }
 
     it { expect { create_workday }.to change(Workday, :count).by(1) }
     it { expect(create_workday).to redirect_to(Workday.last) }
@@ -120,7 +119,7 @@ describe WorkdaysController, type: :controller do
     subject(:update_workday) { put :update, params }
 
     let(:workday) { create(:workday) }
-    let(:params) { { id: workday.id,  workday: attributes } }
+    let(:params) { { id: workday.id, workday: attributes } }
 
     it 'assigns workday' do
       update_workday
@@ -145,7 +144,7 @@ describe WorkdaysController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    subject(:delete_workday) { delete :destroy, {id: workday.id} }
+    subject(:delete_workday) { delete :destroy, id: workday.id }
 
     let(:workday) { build(:workday) }
 
@@ -154,5 +153,4 @@ describe WorkdaysController, type: :controller do
     it { expect { delete_workday }.to change(Workday, :count).by(-1) }
     it { expect(delete_workday).to redirect_to(workdays_url) }
   end
-
 end

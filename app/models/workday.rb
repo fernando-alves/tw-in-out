@@ -4,7 +4,7 @@ class Workday < ActiveRecord::Base
   attr_accessible :day
 
   has_many :punches
-  validates :day, :presence => true
+  validates :day, presence: true
 
   default_scope order(:day)
 
@@ -16,5 +16,4 @@ class Workday < ActiveRecord::Base
     punches = Punch.all_by(user: user, workday: self)
     Punch::InOut.create_for punches
   end
-
 end

@@ -1,8 +1,8 @@
 class Given
-
   def self.a_in_out(options)
     at_day = options[:at_day] || 1
-    punch_in, punch_out = options[:punch_in], options[:punch_out]
+    punch_in = options[:punch_in]
+    punch_out = options[:punch_out]
     Punch::InOut.new(punch_in: Given.a_punch(on: at_day, at: punch_in),
                      punch_out: Given.a_punch(on: at_day, at: punch_out))
   end
@@ -23,7 +23,7 @@ class Given
 
   def self.a_punches_at(*hours)
     punches = []
-    hours.each { |h| punches << a_punch(on: 1, at: h)  }
+    hours.each { |h| punches << a_punch(on: 1, at: h) }
     punches
   end
 

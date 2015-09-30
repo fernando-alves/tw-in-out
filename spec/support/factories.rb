@@ -8,9 +8,8 @@ FactoryGirl.define do
   end
 
   factory :punch do
-    time "2013-04-04 14:30:00"
+    time '2013-04-04 14:30:00'
     user
     workday
   end
-
 end

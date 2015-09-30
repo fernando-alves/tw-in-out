@@ -3,7 +3,8 @@ class WorkdayPresenter
   delegate :day, to: :"@workday"
 
   def initialize(user, workday)
-    @user, @workday = user, workday
+    @user = user
+    @workday = workday
   end
 
   def worked_hours
@@ -19,6 +20,7 @@ class WorkdayPresenter
   end
 
   private
+
   def create_in_outs_presenters
     in_outs_presenters = []
     @workday.in_outs_of(@user).each do |in_out|
@@ -26,5 +28,4 @@ class WorkdayPresenter
     end
     in_outs_presenters
   end
-
 end
