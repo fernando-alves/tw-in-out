@@ -25,3 +25,4 @@ heroku
 heroku.pub
 
 .env
+.secret

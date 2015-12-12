@@ -1,7 +1,18 @@
-# Be sure to restart your server when you modify this file.
+# Thanks to @seanmarcia -> https://github.com/seanmarcia/pompeii/blob/master/config/initializers/secret_token.rb
 
-# Your secret key for verifying the integrity of signed cookies.
-# If you change this key, all old signed cookies will become invalid!
-# Make sure the secret is at least 30 characters and all random,
-# no regular words or you'll be exposed to dictionary attacks.
-TwInOutWeb::Application.config.secret_token = '5a1f103e62a3c1b0627cc0c3506b2dc7ddf19812e6fbd3544698a050760b4b61234697cd0e75fb86a1d081d4573463d958fd742a8d9966308b6fc149c8992102'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    #Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+TwInOutWeb::Application.config.secret_token = secure_token
