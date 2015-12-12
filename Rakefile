@@ -6,10 +6,8 @@ require File.expand_path('../config/application', __FILE__)
 
 TwInOutWeb::Application.load_tasks
 
-namespace :project do
-  desc 'Setup docker'
+namespace :in_out do
   task :setup do
-    system './script/development/start_docker.sh'
     system 'bundle exec rake db:create'
     system 'bundle exec rake db:migrate'
     system 'bundle exec rake db:test:prepare'
