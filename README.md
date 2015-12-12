@@ -23,7 +23,7 @@ If you are cool and use brew cask:
 $ brew cask install dockertoolbox
 ```
 
-# Set Up
+### Set Up
 
 This command will start docker, install all required gems (`bundle install`) and
 run the app on port 3000
@@ -32,7 +32,7 @@ run the app on port 3000
 $ make
 ```
 
-# Running locally
+### Running locally
 
 Add docker host on your etc.hosts file with the following commands, then you will be able to
 authenticate with the google sandbox account created for test purposes:
@@ -43,7 +43,7 @@ sudo sh -c "echo '$(docker-machine ip tw-in-out) dockerhost local.docker.com' >>
 
 then, just go to your browser and access http://local.docker.com:3000
 
-# Running the tests
+### Running the tests
 
 ```
 $ make test
