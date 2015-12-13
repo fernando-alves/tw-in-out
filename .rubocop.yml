@@ -27,3 +27,4 @@ AllCops:
     - 'config/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
+    - 'db/schema.rb'
