@@ -1,9 +1,10 @@
-<h1 class="demo-logo">
-  <div class="logo"></div>
-  <div class"subtitle" style="float: right">
-    In-Out<small>make your time easy!</small>
+<div class="in-out container">
+  <h1 class="demo-logo">
+    <div class"in-out subtitle">
+      In-Out<small>make your time easy!</small>
+    </div>
+  </h1>
+  <div class="span3">
+    <%= link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-large btn-block btn-primary" %>
   </div>
-</h1>
-<div class="span3">
-<%= link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-large btn-block btn-primary" %>
 </div>

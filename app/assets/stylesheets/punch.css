@@ -1,16 +1,19 @@
+.in-out.container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.in-out.subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .workdays-options-container {
   float: right;
 }
 
 #punch select {
   width: 115px;
-}
-
-#in-out.subtitle {
-  /*float: right;*/
-  margin: 0 auto;
-  width: 270px;
-  margin-bottom: 30px;
 }
 
 #description blockquote {
