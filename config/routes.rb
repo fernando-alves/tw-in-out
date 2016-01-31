@@ -8,5 +8,11 @@ Rails.application.routes.draw do
     get '/api_token', action: :index, as: :user_api_token
   end
 
+  namespace :api do
+    controller :punches do
+      get 'punches', action: :index, as: :punches
+    end
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
 end
