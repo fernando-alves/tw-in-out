@@ -18,8 +18,12 @@ if [ $HAS_MACHINE -eq 0 ]; then
   eval "$(docker-machine env $MACHINE_NAME)"
 fi
 
-log_action "Starting machine ..."
-docker-machine start $MACHINE_NAME
+if [ $HAS_RUNNING_MACHINE -eq 0 ]; then
+  log_action "Starting machine ..."
+  docker-machine start $MACHINE_NAME
+else
+  log_action "Machine already stated ..."
+fi
 eval "$(docker-machine env $MACHINE_NAME)"
 
 if [[ ! -z $DOCKER_HOST ]]; then
