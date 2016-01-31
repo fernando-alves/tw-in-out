@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
-  username: postgres
+  username: <%= ENV.fetch('TW_IN_OUT_DB_USERNAME', 'postgres') %>
   password:
   host: <%= ENV.fetch('TW_IN_OUT_DB_HOST', 'localhost') %>
 
