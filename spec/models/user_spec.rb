@@ -39,6 +39,13 @@ describe User do
     end
   end
 
+  describe 'api token' do
+    it 'should be assigned to a newly created user' do
+      user = create(:user)
+      expect(user.api_token).to_not be_nil
+    end
+  end
+
   def create_punch(user: user, day: Time.zone.now)
     workday = Workday.create(day: day)
     punch = Punch.new(time: "#{day} 10:00", user_id: user.id, workday_id: workday.id)

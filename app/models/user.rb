@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :workdays, through: :punches
   validates :email, format: { with: /@thoughtworks.com/ }
 
+  before_validation :generate_api_token, on: :create
+
   def self.find_for_google_account(access_token, _signed_in_resource = nil)
     data = access_token.info
     if user = User.where(email: data['email']).first
@@ -22,5 +24,10 @@ class User < ActiveRecord::Base
     month = date[:month] || current_time.month
 
     Workday.joins(:punches).where('user_id = ? and extract(year from day) = ? and extract(month from day) = ?', id, year, month).uniq
+  end
+
+  private
+  def generate_api_token
+    self.api_token = SecureRandom.urlsafe_base64(32)
   end
 end
