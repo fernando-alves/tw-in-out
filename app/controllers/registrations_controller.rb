@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  skip_before_filter :authenticate_user!, only: :update
+
   def update
     if params[:user][:password].blank?
       params[:user].delete('password')
