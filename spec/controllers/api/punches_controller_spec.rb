@@ -1,5 +1,6 @@
 describe Api::PunchesController, type: :controller do
   before { request.env['HTTP_ACCEPT'] = 'application/json' }
+  let(:user) { create(:user) }
 
   context 'when no token is provided' do
     it 'should be unauthorized' do
@@ -20,15 +21,24 @@ describe Api::PunchesController, type: :controller do
   end
 
   context 'with a valid token' do
+    before { request_with_token(user.api_token) }
+
     it 'should allow access' do
-      request_with_token(create(:user).api_token)
       get :index
       expect(response).to be_ok
+    end
+
+    it 'should list punches for current workday' do
+      punch_initial_time = Time.now
+      workday = Workday.create(day: punch_initial_time)
+      punches = create_punches_for_user(user, workday, punch_initial_time)
+      allow(Workday).to receive(:find_or_create_by).with(anything()).and_return(workday)
+      get :index
+      expect(punches_from_response_body(response.body)).to match_array punches
     end
   end
 
   describe 'POST create' do
-    let(:user) { create(:user) }
     let(:created_punch) { user.punches.first }
     before { request_with_token(user.api_token) }
 
@@ -69,5 +79,13 @@ describe Api::PunchesController, type: :controller do
 
   def response_body_as_json(response_body)
     JSON.parse(response_body).symbolize_keys
+  end
+
+  def punches_from_response_body(response_body)
+    JSON.parse(response_body).collect { |punch_hash| Punch.find(punch_hash['id']) }
+  end
+
+  def create_punches_for_user(user, workday, initial_time)
+    (1..3).collect { |offset| create(:punch, workday: workday, user: user, time: initial_time + offset.minutes) }
   end
 end

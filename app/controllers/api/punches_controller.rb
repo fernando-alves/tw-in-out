@@ -3,7 +3,9 @@ class Api::PunchesController < ActionController::Base
   before_filter :authenticate_with_token
 
   def index
-    render json: {}, status: :ok
+    punches = Punch.all_by(user: @current_user, workday: Workday.find_or_create_by(day: Time.now))
+    punches.collect! { |punch| as_api_json(punch) }
+    render json: punches, status: :ok
   end
 
   def create
