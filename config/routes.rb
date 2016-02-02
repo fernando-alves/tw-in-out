@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     controller :punches do
-      get 'punches', action: :index, as: :punches
+      get  'punches', action: :index,  as: :punch
+      post 'punches', action: :create
     end
   end
 
