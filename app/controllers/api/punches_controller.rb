@@ -10,6 +10,8 @@ class Api::PunchesController < ActionController::Base
     punch = Punch::Register.punch(@current_user, punch_attributes)
     if punch.save
       render json: as_api_json(punch), status: :ok
+    else
+      render json: {}, status: :bad_request
     end
   end
 
