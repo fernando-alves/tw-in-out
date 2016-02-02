@@ -6,6 +6,7 @@ describe Api::PunchesController, type: :controller do
       request_with_token(nil)
       get :index
       expect(response).to have_http_status(:unauthorized)
+      expect(response_body_as_json(response.body)[:message]).to match /unauthorized/i
     end
   end
 
@@ -14,6 +15,7 @@ describe Api::PunchesController, type: :controller do
       request_with_token('invalid_token')
       get :index
       expect(response).to have_http_status(:unauthorized)
+      expect(response_body_as_json(response.body)[:message]).to match /unauthorized/i
     end
   end
 
@@ -57,6 +59,7 @@ describe Api::PunchesController, type: :controller do
     it 'should return bad request if invalid punch' do
       post :create, time: 'invalid_value'
       expect(response).to have_http_status(:bad_request)
+      expect(response_body_as_json(response.body)[:message]).to match /bad request/i
     end
   end
 

@@ -11,7 +11,7 @@ class Api::PunchesController < ActionController::Base
     if punch.save
       render json: as_api_json(punch), status: :ok
     else
-      render json: {}, status: :bad_request
+      render json: { message: 'Bad Request' }, status: :bad_request
     end
   end
 
@@ -21,7 +21,7 @@ class Api::PunchesController < ActionController::Base
     if found_user = authenticate_with_http_token { |api_token, options| User.find_by_api_token(api_token) }
       @current_user = found_user
     else
-      render json: {}, status: :unauthorized
+      render json: { message: 'Unauthorized' }, status: :unauthorized
     end
   end
 
